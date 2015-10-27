@@ -1,8 +1,7 @@
 package org.farrukh.examples.rest.category
 
 /**
- * Inbound integration test category class.
+ * Inbound integration test category marker.
  */
-@SuppressWarnings(['EmptyClass'])
-class InboundIntegrationTestCategory {
+interface InboundIntegrationTestCategory {
 }

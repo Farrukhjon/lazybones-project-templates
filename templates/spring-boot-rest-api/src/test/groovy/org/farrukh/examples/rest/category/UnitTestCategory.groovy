@@ -1,8 +1,7 @@
 package org.farrukh.examples.rest.category
 
 /**
- * Unit test category class.
+ * Unit test category marker.
  */
-@SuppressWarnings(['EmptyClass'])
-class UnitTestCategory {
+interface UnitTestCategory {
 }
