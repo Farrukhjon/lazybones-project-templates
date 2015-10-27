@@ -11,7 +11,16 @@ buildscript {
 
 apply plugin: "uk.co.cacoethes.lazybones-templates"
 
+ext.globalExcludes = ['**/*.swp', '.gradle', 'build', '.idea', '*.iml', '*.ipr', 'VERSION', '**/.retain']
+
 lazybones {
+    packageExcludes = globalExcludes 
+     
+    // Template exclusions.
+    template( 'spring-boot-rest-api' ) {
+        packageExcludes = globalExcludes << 'docker/artifacts'
+    }
+
     repositoryName = "farrukh/lazybones-templates"
     repositoryUsername = bintrayUsername
     repositoryApiKey = bintrayApiKey
