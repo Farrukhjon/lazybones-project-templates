@@ -12,7 +12,7 @@ Project template for developing Spring Boot based REST API.
  - Logging: SLF4j, Logback
  - XML and JSON lib: Jackson
  - Deployment tools: Maven publish, Docker container with pre-installed JDK8 and Ubuntu
- -
+
 ### How to build:
  - for snapshot version just type `./gradlew`
  - for release version, example `./gradlew -Pmajor=1 -Pminor=0 -Ppatch=0 -Pbranch=master`
