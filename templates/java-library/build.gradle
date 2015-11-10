@@ -1,8 +1,8 @@
-
-defaultTasks 'clean', 'build', 'check'/*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check', 'distZip'/*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
 
 apply from: "$rootDir/gradle/idea.gradle"
 apply from: "$rootDir/gradle/application.gradle"
+apply from: "$rootDir/gradle/logging.gradle"
 apply from: "$rootDir/gradle/groovy.gradle"
 apply from: "$rootDir/gradle/jacoco.gradle"
 apply from: "$rootDir/gradle/spock.gradle"
@@ -18,3 +18,18 @@ repositories {
     jcenter()
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.farrukh.examples.Main'
+    }
+    from {
+
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
