@@ -8,3 +8,5 @@ Simple, stand-alone Java application.
  - Code quality: Checkstyle, CodeNarc
  - Code coverage: Jacoco
  - Logging: SLF4j, Logback
+
+> Note: After creating a project via `lazybones create`, make sure to change `setting.gradle` according to the project name.
