@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'build', 'check' /*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check', 'installDist' /*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
 
 apply from: "$rootDir/gradle/idea.gradle"
 apply from: "$rootDir/gradle/application.gradle"
@@ -21,14 +21,5 @@ repositories {
 jar {
     manifest {
         attributes 'Main-Class': 'org.farrukh.examples.Main'
-    }
-    from {
-        configurations.runtime.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-
-        configurations.compile.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
     }
 }
