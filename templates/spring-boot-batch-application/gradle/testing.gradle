@@ -1,6 +1,6 @@
 test {
     useJUnit {
-        includeCategories 'org.farrukh.examples.rest.category.UnitTestCategory'
+        includeCategories 'org.farrukh.examples.batch.category.UnitTestCategory'
     }
     testLogging {
         showStandardStreams = false
@@ -13,7 +13,7 @@ task outboundIntegrationTests( type: Test, dependsOn: build ) {
     group 'Verification'
     description = 'Runs the outbound integration tests.'
     useJUnit {
-        includeCategories 'org.farrukh.examples.rest.category.OutboundIntegrationTestCategory'
+        includeCategories 'org.farrukh.examples.batch.category.OutboundIntegrationTestCategory'
     }
     testLogging {
         showStandardStreams = false
@@ -29,7 +29,7 @@ task inboundIntegrationTests( type: Test, dependsOn: build ) {
     group 'Verification'
     description = 'Runs the inbound integration tests.'
     useJUnit {
-        includeCategories 'org.farrukh.examples.rest.category.InboundIntegrationTestCategory'
+        includeCategories 'org.farrukh.examples.batch.category.InboundIntegrationTestCategory'
     }
     testLogging {
         showStandardStreams = false
@@ -65,5 +65,3 @@ task acceptanceTests( type: Test, dependsOn: build ) {
         systemProperties['integration.test.port'] = System.properties['integration.test.port']
     }
 }
-
-
