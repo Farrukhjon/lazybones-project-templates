@@ -46,7 +46,7 @@ class GreetingMessageFlowInboundIntegrationTest extends BaseInboundIntegrationTe
         rabbitAdmin.deleteQueue(queueName)
     }
 
-    def 'exercise message via rabbit-inputChannel-amqpInbound-transformer-outputChannel-amqpOutbound'() {
+    def 'should send greeting to Rabbitmq->inputChannel->AmqpInbound->transformer->outputChannel->AmqpOutbound-Rabbitmq->receive'() {
         given: 'a string payload'
         def payload = 'Hello world!'
 
