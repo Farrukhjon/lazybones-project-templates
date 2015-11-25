@@ -1,0 +1,60 @@
+# Customize application info information
+info:
+    app:
+       name: ${name}
+       description: ${description}
+       version: ${version}
+       realm: development
+
+spring:
+      main:
+          show_banner: false
+      rabbitmq:
+              host: rabbitmq
+              port: 5672
+              username: guest
+              password: guest
+              virtual-host: /
+# mongodb datasource configuration
+      data:
+           mongodb:
+                   host: mongodb
+                   port: 27017
+                   database: amqpdb
+      # json configuration
+      jackson:
+              serialization:
+                  indent_output: true
+app:
+   queueName: example-queue-name
+   exchangeName: example-exchange-name
+   rabbitExchangeDurable: true
+
+# enable shutdown of application via a POST
+endpoints:
+          shutdown:
+                   enabled: true
+          health:
+                 sensitive: false    # display full details for non-authenticated requests
+
+# cutomizing management endpoints
+management:
+          context-path: /manage
+
+##### e Profile specific overrides #####
+
+# integration testing
+---
+spring:
+      profiles: integration
+info:
+    app:
+       realm: integration-test
+
+# live
+---
+spring:
+      profiles: live
+info:
+    app:
+       realm: production
