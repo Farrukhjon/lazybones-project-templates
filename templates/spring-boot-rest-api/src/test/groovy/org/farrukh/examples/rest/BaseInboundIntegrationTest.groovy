@@ -25,12 +25,13 @@ import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.boot.test.WebIntegrationTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.client.RestOperations
+import org.springframework.web.util.UriComponentsBuilder
 
 /**
  * Base integration test class based on spock specification and spring testing fetures.
  */
 @Category(OutboundIntegrationTestCategory)
-@WebIntegrationTest( randomPort = true )
+@WebIntegrationTest(randomPort = true)
 @ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
 abstract class BaseInboundIntegrationTest extends BaseTest {
 
@@ -42,4 +43,20 @@ abstract class BaseInboundIntegrationTest extends BaseTest {
 
     @Value('${local.server.port}')
     int port
+
+    /**
+     * Creates uri for controllers tests.
+     * @param path the request mapped path
+     * @return uri in string.
+     */
+    String createUrl(String path) {
+        UriComponentsBuilder.newInstance().
+                scheme('http').
+                host('localhost').
+                port(port).
+                path(path).
+                build().
+                toUriString()
+    }
+
 }
