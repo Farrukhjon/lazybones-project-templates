@@ -41,7 +41,6 @@ logging:
 ---
 spring:
       profiles: integration
-
 info:
     app:
        realm: integration-test
@@ -50,7 +49,6 @@ info:
 ---
 spring:
       profiles: live
-
 info:
     app:
        realm: production

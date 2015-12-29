@@ -16,6 +16,8 @@
  */
 package org.farrukh.examples.rest;
 
+import org.kurron.feedback.FeedbackAwareBeanPostProcessor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -43,6 +45,33 @@ public class Application {
     @Bean
     public RestOperations restTemplate() {
         return new RestTemplate();
+    }
+
+    /**
+     * Indicates the type of service emitting the messages.
+     */
+    @Value("${info.app.name}")
+    private String serviceCode;
+
+    /**
+     * Indicates the instance of the service emitting the messages.
+     */
+    @Value("${PID}")
+    private String serviceInstance;
+
+    /**
+     * Indicates the logical group of the service emitting the messages.
+     */
+    @Value("${info.app.realm}")
+    private String realm;
+
+    /**
+     * Creates feedback been post processor.
+     * @return the feedback bean post processor.
+     */
+    @Bean
+    public FeedbackAwareBeanPostProcessor feedbackAwareBeanPostProcessor() {
+        return new FeedbackAwareBeanPostProcessor(serviceCode, serviceInstance, realm);
     }
 
     /**

@@ -16,10 +16,17 @@
  */
 package org.farrukh.examples.rest.outbound.domain;
 
+import java.util.UUID;
+
 /**
  * Some resource which should be stored and retrieved from outbound gateway.
  */
 public class Resource {
+
+    /**
+     * ID.
+     */
+    private UUID resourceId;
 
     /**
      * The content type associated with the resource.
