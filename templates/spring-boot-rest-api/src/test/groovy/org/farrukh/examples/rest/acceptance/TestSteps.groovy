@@ -27,7 +27,6 @@ import org.farrukh.examples.rest.inbound.domain.Greeting
 import org.farrukh.examples.rest.inbound.domain.Request
 import org.farrukh.examples.rest.inbound.domain.Response
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
