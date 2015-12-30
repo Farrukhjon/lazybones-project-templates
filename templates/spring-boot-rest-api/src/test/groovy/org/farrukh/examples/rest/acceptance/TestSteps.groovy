@@ -21,6 +21,7 @@ import cucumber.api.java.Before
 import cucumber.api.java.en.And
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
+import cucumber.api.java.en.When
 import groovy.util.logging.Slf4j
 import org.farrukh.examples.rest.inbound.domain.Greeting
 import org.farrukh.examples.rest.inbound.domain.Request
@@ -79,7 +80,7 @@ class TestSteps extends BaseTestSteps {
         //testWorld.request = new HttpEntity<>()
     }
 
-    @And('^The client is called the get method using the created request$')
+    @When('^The client is called the get method using the created request$')
     void 'The client is called the get method using the created request'() throws Throwable {
         def url = testWorld.url
         def headers = testWorld.headers
