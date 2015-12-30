@@ -27,7 +27,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -56,6 +55,13 @@ public class GreetingInboundGateway extends AbstractFeedbackAware implements Inb
         return new ResponseEntity<>(greetingResponse, headers, HttpStatus.OK);
     }
 
+    /**
+     * Sends a message back to the service.
+     *
+     * @param request the request.
+     * @param headers the request headers.
+     * @return the http status code.
+     */
     @RequestMapping(value = "/send", method = POST)
     public ResponseEntity<String> postGreeting(@RequestBody final Request<Greeting> request,
                                                @RequestHeader final HttpHeaders headers) {
@@ -63,6 +69,11 @@ public class GreetingInboundGateway extends AbstractFeedbackAware implements Inb
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Verifies the request headers content type and validates it.
+     *
+     * @param headers the request headers.
+     */
     private void validateHeaders(final HttpHeaders headers) {
         long contentLength = headers.getContentLength();
         if (contentLength <= 0) {

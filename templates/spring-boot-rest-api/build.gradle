@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-defaultTasks 'clean', 'build', 'check'/*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check', 'installDist'
 
 apply from: "$rootDir/gradle/repositories.gradle"
 apply from: "$rootDir/gradle/idea.gradle"
@@ -26,6 +26,10 @@ apply from: "$rootDir/gradle/other.gradle"
 
 repositories {
     jcenter()
+}
+
+if ('true' == runIntegrationTests) {
+    defaultTasks += ['outboundIntegrationTests', 'inboundIntegrationTests']
 }
 
 

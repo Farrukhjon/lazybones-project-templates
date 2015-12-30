@@ -16,20 +16,25 @@
  */
 package org.farrukh.examples.rest.inbound.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- * Request DTO.
- * Should holds client request data.
+ * Represents a client request to the service.
+ * @param <T> the payload request body.
  */
 public class Request<T> {
 
+    /**
+     * Some payload in the request.
+     */
+    @JsonProperty
     private T payload;
 
     public T getPayload() {
         return payload;
     }
 
-    public Request setPayload(final T payload) {
+    public void setPayload(final T payload) {
         this.payload = payload;
-        return this;
     }
 }

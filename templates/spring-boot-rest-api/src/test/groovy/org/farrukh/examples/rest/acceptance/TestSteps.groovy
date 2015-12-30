@@ -36,6 +36,7 @@ import org.springframework.web.client.RestOperations
  * Class for implementing the acceptance tests scenarios.
  */
 @Slf4j
+@SuppressWarnings('UnnecessaryGetter')
 class TestSteps extends BaseTestSteps {
 
     @Autowired
@@ -57,7 +58,7 @@ class TestSteps extends BaseTestSteps {
     TestWorld testWorld
 
     @Before
-    void createSharedState() {
+    void initSharedState() {
         log.info('Creating the shared state')
         testWorld = new TestWorld()
         assert testRestTemplate
@@ -66,7 +67,7 @@ class TestSteps extends BaseTestSteps {
     @After
     void destroySharedState() {
         log.info('Destroying the shared state')
-        testWorld = null;
+        testWorld = null
     }
 
     @Given('^The greeting url$')
@@ -76,7 +77,7 @@ class TestSteps extends BaseTestSteps {
 
     @And('^The proper request is created$')
     void 'The proper request is created'() throws Throwable {
-        //testWorld.request = new HttpEntity<>()
+        testWorld.request = new Request<Greeting>()
     }
 
     @When('^The client is called the get method using the created request$')

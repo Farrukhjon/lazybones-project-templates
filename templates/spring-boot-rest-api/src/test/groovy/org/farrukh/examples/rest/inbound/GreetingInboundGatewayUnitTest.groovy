@@ -15,7 +15,12 @@
 package org.farrukh.examples.rest.inbound
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.farrukh.examples.rest.BaseUnitTest
+import org.farrukh.examples.rest.inbound.domain.Greeting
+import org.farrukh.examples.rest.inbound.domain.Request
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
@@ -28,8 +33,11 @@ class GreetingInboundGatewayUnitTest extends BaseUnitTest {
 
     MockMvc mockMvc
 
+    def mapper = new ObjectMapper()
+
     def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new GreetingInboundGateway()).build()
+        mockMvc = MockMvcBuilders.standaloneSetup(new GreetingInboundGateway()).
+                build()
     }
 
     def 'should test successful retuning greeting'() {
@@ -49,6 +57,32 @@ class GreetingInboundGatewayUnitTest extends BaseUnitTest {
         response.contentType == expectedMediaType
         response.status == expectedStatusCode
         response.contentAsString == expectedContent
+    }
+
+    def 'should test successful sending a message'() {
+        given:
+        def expectedMediaType = MediaType.APPLICATION_JSON_VALUE
+        def expectedStatusCode = HttpStatus.OK.value()
+
+        and:
+        def headers = new HttpHeaders()
+        headers.setContentType(MediaType.valueOf(expectedMediaType))
+
+        def request = new Request()
+        request.payload = new Greeting(message: 'Hello World!')
+        def content = mapper.writeValueAsString(request)
+
+        when:
+        def resultActions = mockMvc.perform(post('/send').
+                headers(headers).
+                content(content))
+
+        and:
+        def mvcResult = resultActions.andReturn()
+        def response = mvcResult.response
+
+        then:
+        response.status == expectedStatusCode
     }
 
 }

@@ -12,7 +12,6 @@
  * limitations under the License.
  *
  */
-
 package org.farrukh.examples.rest.acceptance
 
 import org.farrukh.examples.rest.Application
@@ -22,14 +21,17 @@ import org.springframework.boot.test.WebIntegrationTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.util.UriComponentsBuilder
 
-@ContextConfiguration(classes = [Application/*, AcceptanceTestConfiguration*/], loader = SpringApplicationContextLoader)
+/**
+ * Base acceptance test.
+ */
+@ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
 @WebIntegrationTest(randomPort = true)
 class BaseTestSteps {
 
     @Value('${local.server.port}')
     int port
 
-    def String createUrl(final String path) {
+    def createUrl(final String path) {
         UriComponentsBuilder.newInstance().
                 scheme('http').
                 host('localhost').

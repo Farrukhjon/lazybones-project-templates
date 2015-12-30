@@ -37,7 +37,7 @@ public enum RestFeedbackContext implements FeedbackContext {
     /**
      * Feedback for warning the content length.
      */
-    WRONG_CONTENT_LENGTH(1001, "The content length must not be 0" , WARN , QA);
+    WRONG_CONTENT_LENGTH(1001, "The content length must not be 0", WARN, QA);
 
     /**
      * unique context code for this instance.
