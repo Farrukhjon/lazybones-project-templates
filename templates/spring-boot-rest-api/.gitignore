@@ -90,6 +90,7 @@ crashlytics-build.properties
 ### Gradle template
 .gradle/
 build/
+/spring-boot-rest-api.iml
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -106,3 +107,4 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
+/spring-boot-rest-api.ipr
