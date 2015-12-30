@@ -30,7 +30,13 @@ class BaseTestSteps {
     int port
 
     def String createUrl(final String path) {
-        UriComponentsBuilder.newInstance().scheme('http').host('localhost').port(port).path(path).build()
+        UriComponentsBuilder.newInstance().
+                scheme('http').
+                host('localhost').
+                port(port).
+                path(path).
+                build().
+                toUriString()
     }
 
 }
