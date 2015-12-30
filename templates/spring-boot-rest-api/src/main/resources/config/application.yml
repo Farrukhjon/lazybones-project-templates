@@ -4,7 +4,7 @@ server:
 # Customize application info information
 info:
     app:
-       name: ${name}
+       name: Greeting
        description: ${description}
        version: ${version}
        realm: development

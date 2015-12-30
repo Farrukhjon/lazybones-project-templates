@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.farrukh.examples.rest
+package org.farrukh.examples.rest.acceptance
 
 import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber
@@ -24,12 +24,10 @@ import org.junit.runner.RunWith
  * Cucumber-JVM (Groovy) acceptance test runner.
  */
 @CucumberOptions(
-        features = ['classpath:org/farrukh/examples/rest/acceptance.feature'],
-        plugin = ['pretty', 'html:build/reports/acceptanceTests'],
-        monochrome = true,
         strict = true,
-        tags = ['~@slow']
-)
+        tags = ['~@optional'], // by default do not run the optional tests
+        plugin = ['pretty', 'html:build/reports/acceptanceTests'],
+        monochrome = true)
 @RunWith(Cucumber)
 class AcceptanceTests {
 }
