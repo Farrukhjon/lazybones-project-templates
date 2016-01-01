@@ -16,6 +16,9 @@
  */
 package org.farrukh.examples.rest;
 
+import org.farrukh.examples.rest.outbound.DefaultOutboundGateway;
+import org.farrukh.examples.rest.outbound.repository.ResourceRepository;
+import org.farrukh.examples.rest.outbound.StorageOutboundGateway;
 import org.kurron.feedback.FeedbackAwareBeanPostProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -67,11 +70,23 @@ public class Application {
 
     /**
      * Creates feedback been post processor.
+     *
      * @return the feedback bean post processor.
      */
     @Bean
     public FeedbackAwareBeanPostProcessor feedbackAwareBeanPostProcessor() {
         return new FeedbackAwareBeanPostProcessor(serviceCode, serviceInstance, realm);
+    }
+
+    /**
+     * Creates the storage bean.
+     *
+     * @param repository the repository.
+     * @return the bean.
+     */
+    @Bean
+    public StorageOutboundGateway storageOutboundGateway(final ResourceRepository repository) {
+        return new DefaultOutboundGateway(repository);
     }
 
     /**

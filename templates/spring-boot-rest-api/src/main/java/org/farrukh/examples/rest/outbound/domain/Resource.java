@@ -16,26 +16,31 @@
  */
 package org.farrukh.examples.rest.outbound.domain;
 
-import java.util.UUID;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * Some resource which should be stored and retrieved from outbound gateway.
  */
+@Document(collection = "resources")
 public class Resource {
 
     /**
      * ID.
      */
-    private UUID resourceId;
+    @Field
+    private String id;
 
     /**
      * The content type associated with the resource.
      */
+    @Field
     private String contentType;
 
     /**
      * The resource int bytes.
      */
+    @Field
     private byte[] payload;
 
     public String getContentType() {
@@ -52,5 +57,13 @@ public class Resource {
 
     public void setPayload(final byte[] payload) {
         this.payload = payload;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 }

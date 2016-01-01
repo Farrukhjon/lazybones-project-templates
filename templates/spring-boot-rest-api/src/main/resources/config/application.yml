@@ -25,7 +25,7 @@ spring:
             mongodb:
                     host: mongodb
                     port: 27017
-                    database: restdb
+                    database: testdb
        # json configuration
        jackson:
                serialization:

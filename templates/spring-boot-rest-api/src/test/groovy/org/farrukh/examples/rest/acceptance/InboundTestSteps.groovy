@@ -37,7 +37,7 @@ import org.springframework.web.client.RestOperations
  */
 @Slf4j
 @SuppressWarnings('UnnecessaryGetter')
-class TestSteps extends BaseTestSteps {
+class InboundTestSteps extends BaseTestSteps {
 
     @Autowired
     RestOperations testRestTemplate
