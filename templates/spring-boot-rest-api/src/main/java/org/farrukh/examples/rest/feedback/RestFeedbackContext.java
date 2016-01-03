@@ -37,7 +37,12 @@ public enum RestFeedbackContext implements FeedbackContext {
     /**
      * Feedback for warning the content length.
      */
-    WRONG_CONTENT_LENGTH(1001, "The content length must not be 0", WARN, QA);
+    WRONG_CONTENT_LENGTH(1001, "The content length must not be 0", WARN, QA),
+
+    /**
+     * Feedback for warning the conversation issue.
+     */
+    GREETING_CONVERSION_WARNING(1002, "There is no need converting the empty message", WARN, QA);
 
     /**
      * unique context code for this instance.

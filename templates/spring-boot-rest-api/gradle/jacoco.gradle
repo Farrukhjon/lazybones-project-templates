@@ -15,7 +15,8 @@ jacoco {
 ext {
     coverageExcludes = [
             'org/farrukh/examples/rest/Application',
-            'org/farrukh/examples/rest/ApplicationProperties'
+            'org/farrukh/examples/rest/ApplicationProperties',
+            'org/farrukh/examples/rest/exception/CustomErrorController'
     ]
 }
 

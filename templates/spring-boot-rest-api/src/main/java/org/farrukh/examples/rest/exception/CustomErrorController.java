@@ -16,7 +16,9 @@
  */
 package org.farrukh.examples.rest.exception;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 
 /**
@@ -29,6 +31,16 @@ public class CustomErrorController implements ErrorController {
      */
     @Value("${error.path:/error}")
     private String errorPath;
+
+    /**
+     * Provides the error attributes pulled from the exception context.
+     */
+    private final ErrorAttributes errorAttributes;
+
+    @Autowired
+    public CustomErrorController(final ErrorAttributes errorAttributes) {
+        this.errorAttributes = errorAttributes;
+    }
 
     @Override
     public String getErrorPath() {

@@ -33,7 +33,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestOperations
 
 /**
- * Class for implementing the acceptance tests scenarios.
+ * Class for implementing the acceptance tests inbound scenarios.
  */
 @Slf4j
 @SuppressWarnings('UnnecessaryGetter')

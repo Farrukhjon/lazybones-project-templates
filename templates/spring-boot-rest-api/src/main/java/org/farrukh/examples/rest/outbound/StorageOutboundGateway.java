@@ -33,7 +33,7 @@ public interface StorageOutboundGateway {
 
     /**
      * Retrieves a resources from outbound gateway using id.
-     * @param uuid
+     * @param uuid the unique id.
      *
      * @return Some resource.
      */

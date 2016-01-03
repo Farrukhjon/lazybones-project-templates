@@ -12,7 +12,6 @@
  * limitations under the License.
  *
  */
-
 package org.farrukh.examples.rest.acceptance
 
 import cucumber.api.java.After
@@ -26,6 +25,9 @@ import org.farrukh.examples.rest.outbound.StorageOutboundGateway
 import org.farrukh.examples.rest.outbound.domain.Resource
 import org.springframework.beans.factory.annotation.Autowired
 
+/**
+ * Class for implementing the acceptance tests outbound scenarios.
+ */
 @Slf4j
 class OutboundTestSteps extends BaseTestSteps {
 
@@ -52,27 +54,28 @@ class OutboundTestSteps extends BaseTestSteps {
     }
 
     @Given('^The resources$')
-    public void The_resources() throws Throwable {
+    void The_resources() throws Throwable {
         byte[] payload = 'Some data'.bytes
         def resource = new Resource(payload: payload)
-        resource.id = UUID.randomUUID().toString()
+        resource.id = UUID.randomUUID().
+                toString()
         testWorld.resource = resource
         testWorld.uuidOfTheStoredResource = resource.id
     }
 
     @And('^The storage outbound gateway$')
-    public void The_storage_outbound_gateway() throws Throwable {
+    void The_storage_outbound_gateway() throws Throwable {
         assert storageOutboundGateway
     }
 
     @When('^The storage outbound gateway store method is called$')
-    public void The_storage_outbound_gateway_store_method_is_called() throws Throwable {
+    void The_storage_outbound_gateway_store_method_is_called() throws Throwable {
         def resource = testWorld.resource
         storageOutboundGateway.store(resource)
     }
 
     @Then('^The resource will be stored$')
-    public void The_resource_will_be_stored() throws Throwable {
+    void The_resource_will_be_stored() throws Throwable {
         def uuidOfTheStoredResource = testWorld.uuidOfTheStoredResource
         def retrievedResource = storageOutboundGateway.retrieve(uuidOfTheStoredResource)
         assert retrievedResource.payload == 'Some data'.bytes

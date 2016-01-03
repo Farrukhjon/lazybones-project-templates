@@ -16,9 +16,11 @@
  */
 package org.farrukh.examples.rest;
 
+import org.farrukh.examples.rest.core.CoreService;
+import org.farrukh.examples.rest.core.DefaultCoreService;
 import org.farrukh.examples.rest.outbound.DefaultOutboundGateway;
-import org.farrukh.examples.rest.outbound.repository.ResourceRepository;
 import org.farrukh.examples.rest.outbound.StorageOutboundGateway;
+import org.farrukh.examples.rest.outbound.repository.ResourceRepository;
 import org.kurron.feedback.FeedbackAwareBeanPostProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -78,6 +80,11 @@ public class Application {
         return new FeedbackAwareBeanPostProcessor(serviceCode, serviceInstance, realm);
     }
 
+    @Bean
+    public CoreService coreService() {
+        return new DefaultCoreService();
+    }
+
     /**
      * Creates the storage bean.
      *
@@ -88,17 +95,5 @@ public class Application {
     public StorageOutboundGateway storageOutboundGateway(final ResourceRepository repository) {
         return new DefaultOutboundGateway(repository);
     }
-
-    /**
-     * In order to just add an interceptor, and leave existing, default boot mvc configuration,
-     * we just add the bean of the WebMvcConfigurerAdapter.
-     * In this case we didn't need to create configuration class using @Configuration and EnableWebMvc.
-     * Here we just kept default Spring Boot MVC features and added our own additional interceptor.
-     * @return custom mvc configurer.
-     *//*
-    @Bean
-    public WebMvcConfigurerAdapter customWebMvcConfigurerAdapter() {
-        return new CustomWebMvcConfigurer();
-    }*/
 
 }

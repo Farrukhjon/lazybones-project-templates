@@ -16,15 +16,19 @@ package org.farrukh.examples.rest.inbound
 
 import org.farrukh.examples.rest.BaseInboundIntegrationTest
 import org.farrukh.examples.rest.inbound.domain.Greeting
+import org.farrukh.examples.rest.inbound.domain.Request
 import org.farrukh.examples.rest.inbound.domain.Response
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 
 /**
  * Experimental test for requesting greeting message.
  */
+@SuppressWarnings('UnnecessaryGetter')
 class GreetingInboundGatewayIntegrationTest extends BaseInboundIntegrationTest {
 
-    def 'exercise success requesting a greeting'() {
+    def 'exercise happy path for requesting a greeting'() {
         given:
         def expectedMessage = 'Hello World!'
         def path = 'greeting'
@@ -43,4 +47,30 @@ class GreetingInboundGatewayIntegrationTest extends BaseInboundIntegrationTest {
         response.body
         greeting.message == expectedMessage
     }
+
+    def 'exercise happy path for converting a greeting'() {
+        given: 'the message for converting'
+        def messageForConvert = new Greeting(message: 'hello world!')
+
+        and: 'expected results'
+        def expectedMediaType = MediaType.valueOf('application/json;charset=UTF-8')
+        def expectedMessage = 'HELLO WORLD!'
+
+        and: 'the proper request is created'
+        def url = createUrl('convert')
+        def headers = new HttpHeaders()
+        headers.add('Content-Type', 'application/json')
+        def request = new Request<Greeting>(payload: messageForConvert)
+
+        when: 'the request is sent to the controller'
+        def response = restTemplate.postForEntity(url, request, Response)
+
+        then: 'the expected result is returned'
+        response.statusCode == HttpStatus.OK
+        response.headers.getContentType() == expectedMediaType
+        response.body
+        def greeting = response.body.payload as Greeting
+        greeting.message == expectedMessage
+    }
+
 }

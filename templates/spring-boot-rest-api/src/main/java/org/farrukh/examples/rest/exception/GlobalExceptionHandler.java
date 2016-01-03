@@ -16,48 +16,46 @@
  */
 package org.farrukh.examples.rest.exception;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.farrukh.examples.rest.inbound.domain.ErrorResponse;
+import org.kurron.feedback.FeedbackAware;
+import org.kurron.feedback.FeedbackProvider;
+import org.kurron.feedback.NullFeedbackProvider;
+import org.kurron.feedback.exceptions.AbstractError;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
  * Global exception handler.
  */
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements FeedbackAware {
 
     /**
-     * Returns media type inconsistent exception, if the request media type is not supported.
-     *
-     * @param ex      - the exception.
-     * @param headers - http request header.
-     * @param status  - http status.
-     * @param request - client request.
-     * @return unsupported media type exception.
+     * Provides non-feedback.
      */
+    private FeedbackProvider nullFeedbackProvider = new NullFeedbackProvider();
 
     @Override
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(final HttpMediaTypeNotSupportedException ex,
-                                                                     final HttpHeaders headers,
-                                                                     final HttpStatus status,
-                                                                     final WebRequest request) {
-        return super.handleHttpMediaTypeNotSupported(ex, headers, status, request);
+    public FeedbackProvider getFeedbackProvider() {
+        return nullFeedbackProvider;
+    }
+
+    @Override
+    public void setFeedbackProvider(final FeedbackProvider aProvider) {
+        this.nullFeedbackProvider = aProvider;
     }
 
     /**
-     * Returns exception if media type is null.
+     * Handles an error belonging to the application.
      *
-     * @param e - particular exception.
-     * @return exception message about request.
+     * @param error the type of the error.
+     * @return the response error.
      */
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleNullContentType(final RuntimeException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(AbstractError.class)
+    public ResponseEntity<ErrorResponse> handleApplicationException(final AbstractError error) {
+        return new ResponseEntity<>(new ErrorResponse(error.getCode(), error.getMessage()), error.getHttpStatus());
     }
 
 }

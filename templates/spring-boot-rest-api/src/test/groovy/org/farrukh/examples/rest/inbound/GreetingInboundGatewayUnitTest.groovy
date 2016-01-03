@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.farrukh.examples.rest.BaseUnitTest
+import org.farrukh.examples.rest.core.CoreService
 import org.farrukh.examples.rest.inbound.domain.Greeting
 import org.farrukh.examples.rest.inbound.domain.Request
 import org.springframework.http.HttpHeaders
@@ -31,12 +32,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
  */
 class GreetingInboundGatewayUnitTest extends BaseUnitTest {
 
+    def coreService = Stub(CoreService)
+
     MockMvc mockMvc
 
     def mapper = new ObjectMapper()
 
     def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new GreetingInboundGateway()).
+        mockMvc = MockMvcBuilders.standaloneSetup(new GreetingInboundGateway(coreService)).
                 build()
     }
 
@@ -60,29 +63,36 @@ class GreetingInboundGatewayUnitTest extends BaseUnitTest {
     }
 
     def 'should test successful sending a message'() {
-        given:
+        given: 'expected results'
         def expectedMediaType = MediaType.APPLICATION_JSON_VALUE
         def expectedStatusCode = HttpStatus.OK.value()
+        def expectedResponse = '''{"payload":{"message":"HELLO WORLD!"}}'''
 
-        and:
+        and: 'the request is created'
         def headers = new HttpHeaders()
         headers.setContentType(MediaType.valueOf(expectedMediaType))
-
         def request = new Request()
         request.payload = new Greeting(message: 'Hello World!')
         def content = mapper.writeValueAsString(request)
 
-        when:
-        def resultActions = mockMvc.perform(post('/send').
+        and: 'the conversation is made'
+        coreService.convert(!null as Greeting) >> {
+            new Greeting(message: 'HELLO WORLD!')
+        }
+
+        when: 'the request is made'
+        def resultActions = mockMvc.perform(post('/convert').
                 headers(headers).
                 content(content))
 
-        and:
+        and: 'the response is returned'
         def mvcResult = resultActions.andReturn()
         def response = mvcResult.response
 
         then:
         response.status == expectedStatusCode
+
+        response.contentAsString == expectedResponse
     }
 
 }

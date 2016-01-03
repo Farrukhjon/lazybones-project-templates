@@ -15,11 +15,15 @@
 
 package org.farrukh.examples.rest.inbound;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import org.farrukh.examples.rest.core.CoreService;
 import org.farrukh.examples.rest.feedback.RestFeedbackContext;
 import org.farrukh.examples.rest.inbound.domain.Greeting;
 import org.farrukh.examples.rest.inbound.domain.Request;
 import org.farrukh.examples.rest.inbound.domain.Response;
 import org.kurron.feedback.AbstractFeedbackAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,14 +33,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 /**
  * Sample, for experiments, rest controller.
  */
 @RestController
 public class GreetingInboundGateway extends AbstractFeedbackAware implements InboundGateway {
+
+    /**
+     * Provides service algorithms.
+     */
+    private final CoreService coreService;
+
+    @Autowired
+    public GreetingInboundGateway(final CoreService coreService) {
+        this.coreService = coreService;
+    }
 
     /**
      * Creates a response with greeting payload.
@@ -62,11 +73,15 @@ public class GreetingInboundGateway extends AbstractFeedbackAware implements Inb
      * @param headers the request headers.
      * @return the http status code.
      */
-    @RequestMapping(value = "/send", method = POST)
-    public ResponseEntity<String> postGreeting(@RequestBody final Request<Greeting> request,
-                                               @RequestHeader final HttpHeaders headers) {
+    @RequestMapping(value = "/convert", method = POST)
+    public ResponseEntity<Response<Greeting>> postGreeting(@RequestBody final Request<Greeting> request,
+                                                           @RequestHeader final HttpHeaders headers) {
         validateHeaders(headers);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Greeting greeting = request.getPayload();
+        Greeting converted = coreService.convert(greeting);
+        Response<Greeting> response = new Response<>();
+        response.setPayload(converted);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
