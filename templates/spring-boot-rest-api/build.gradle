@@ -29,7 +29,7 @@ repositories {
 }
 
 if ('true' == runIntegrationTests) {
-    defaultTasks += ['outboundIntegrationTests', 'inboundIntegrationTests']
+    defaultTasks += ['outboundIntegrationTests', 'inboundIntegrationTests', 'acceptanceTests']
 }
 
 
