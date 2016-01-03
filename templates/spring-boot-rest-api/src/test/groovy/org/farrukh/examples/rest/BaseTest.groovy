@@ -23,4 +23,8 @@ import spock.lang.Specification
  */
 @SuppressWarnings( 'AbstractClassWithoutAbstractMethod' )
 abstract class BaseTest extends Specification {
+
+    @Delegate
+    protected Randomizer randomizer = new Randomizer()
+
 }

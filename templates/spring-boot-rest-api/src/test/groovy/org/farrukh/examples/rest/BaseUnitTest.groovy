@@ -24,4 +24,5 @@ import org.junit.experimental.categories.Category
  */
 @Category(UnitTestCategory)
 abstract class BaseUnitTest extends BaseTest {
+
 }

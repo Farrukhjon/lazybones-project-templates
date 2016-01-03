@@ -17,6 +17,9 @@ package org.farrukh.examples.rest.exception
 import org.farrukh.examples.rest.BaseUnitTest
 import org.farrukh.examples.rest.feedback.RestFeedbackContext
 import org.kurron.feedback.exceptions.AbstractError
+import org.kurron.feedback.exceptions.BadRequestError
+import org.kurron.feedback.exceptions.NotFoundError
+import spock.lang.Unroll
 
 /**
  * Unit level test for the global exception handler.
@@ -25,20 +28,21 @@ class GlobalExceptionHandlerUnitTest extends BaseUnitTest {
 
     def sut = new GlobalExceptionHandler()
 
-    def 'exercise happy path handling global errors'(Class clazz) {
-        given:
-        def feedbackContext = RestFeedbackContext.GREETING_CONVERSION_WARNING
+    @Unroll
+    def 'exercise happy path handling global errors for #clazz.simpleName'(Class clazz) {
+        given: 'the set of the feedback context'
+        def feedbackContext = randomEnum(RestFeedbackContext)
         def error = clazz.newInstance(feedbackContext) as AbstractError
 
-        when:
+        when: 'the errors is handled'
         def result = sut.handleApplicationException(error)
 
-        then:
+        then: 'the expected results are returned'
         result
         result.statusCode == error.httpStatus
 
-        where:
-        clazz << [ConversationWarning]
+        where: 'clazz gets from the following data list'
+        clazz << [ConversationWarning, BadRequestError, NotFoundError]
     }
 
 }
