@@ -3,8 +3,6 @@ apply plugin: 'spring-boot'
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter")
-    //compile("org.springframework.boot:spring-boot-starter-actuator")
-    //optional "org.springframework.boot:spring-boot-configuration-processor"
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -13,4 +11,3 @@ processResources {
         expand( project.properties )
     }
 }
-//compileJava.dependsOn(processResources)

@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-defaultTasks 'clean', 'build', 'check', 'installDist' /*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check', 'installDist'
 
 apply from: "$rootDir/gradle/application.gradle"
 apply from: "$rootDir/gradle/idea.gradle"
