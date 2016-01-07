@@ -14,17 +14,19 @@
  * limitations under the License.
  *
  */
-package org.farrukh.examples.rest.inbound.domain;
+package org.farrukh.examples.rest.inbound.domain.metadata;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Response DTO.
  * Should warp a payload for REST client.
  * @param <T> payload type.
  */
-
-public class Response<T> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Response<T> extends ResourceSupport {
 
     /**
      * Holds some payload for this response.

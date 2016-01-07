@@ -13,8 +13,9 @@
  *
  */
 
-package org.farrukh.examples.rest.inbound.domain;
+package org.farrukh.examples.rest.inbound.domain.metadata;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -34,6 +35,7 @@ public class ErrorResponse {
     @JsonProperty("message")
     private final String message;
 
+    @JsonCreator
     public ErrorResponse(final int code,
                          final String message) {
         this.code = code;

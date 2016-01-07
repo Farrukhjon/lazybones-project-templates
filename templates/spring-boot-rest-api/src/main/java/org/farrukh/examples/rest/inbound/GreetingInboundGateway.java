@@ -15,15 +15,18 @@
 
 package org.farrukh.examples.rest.inbound;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.farrukh.examples.rest.core.CoreService;
 import org.farrukh.examples.rest.feedback.RestFeedbackContext;
 import org.farrukh.examples.rest.inbound.domain.Greeting;
-import org.farrukh.examples.rest.inbound.domain.Request;
-import org.farrukh.examples.rest.inbound.domain.Response;
+import org.farrukh.examples.rest.inbound.domain.metadata.Request;
+import org.farrukh.examples.rest.inbound.domain.metadata.Response;
 import org.kurron.feedback.AbstractFeedbackAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
 
 /**
  * Sample, for experiments, rest controller.
@@ -81,7 +86,11 @@ public class GreetingInboundGateway extends AbstractFeedbackAware implements Inb
         Greeting converted = coreService.convert(greeting);
         Response<Greeting> response = new Response<>();
         response.setPayload(converted);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(GreetingInboundGateway.class).postGreeting(request, headers));
+        response.add(linkTo.withSelfRel());
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.setLocation(linkTo.toUri());
+        return new ResponseEntity<>(response, responseHeader, HttpStatus.OK);
     }
 
     /**

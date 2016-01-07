@@ -16,8 +16,8 @@ package org.farrukh.examples.rest.inbound
 
 import org.farrukh.examples.rest.BaseInboundIntegrationTest
 import org.farrukh.examples.rest.inbound.domain.Greeting
-import org.farrukh.examples.rest.inbound.domain.Request
-import org.farrukh.examples.rest.inbound.domain.Response
+import org.farrukh.examples.rest.inbound.domain.metadata.Request
+import org.farrukh.examples.rest.inbound.domain.metadata.Response
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

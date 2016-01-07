@@ -24,8 +24,8 @@ import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 import groovy.util.logging.Slf4j
 import org.farrukh.examples.rest.inbound.domain.Greeting
-import org.farrukh.examples.rest.inbound.domain.Request
-import org.farrukh.examples.rest.inbound.domain.Response
+import org.farrukh.examples.rest.inbound.domain.metadata.Request
+import org.farrukh.examples.rest.inbound.domain.metadata.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType

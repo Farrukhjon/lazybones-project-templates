@@ -16,7 +16,7 @@
  */
 package org.farrukh.examples.rest.exception;
 
-import org.farrukh.examples.rest.inbound.domain.ErrorResponse;
+import org.farrukh.examples.rest.inbound.domain.metadata.ErrorResponse;
 import org.kurron.feedback.FeedbackAware;
 import org.kurron.feedback.FeedbackProvider;
 import org.kurron.feedback.NullFeedbackProvider;

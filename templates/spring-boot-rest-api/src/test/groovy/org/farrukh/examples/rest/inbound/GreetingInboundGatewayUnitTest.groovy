@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.farrukh.examples.rest.BaseUnitTest
 import org.farrukh.examples.rest.core.CoreService
 import org.farrukh.examples.rest.inbound.domain.Greeting
-import org.farrukh.examples.rest.inbound.domain.Request
+import org.farrukh.examples.rest.inbound.domain.metadata.Request
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
