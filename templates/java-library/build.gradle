@@ -1,12 +1,11 @@
-defaultTasks 'clean', 'build', 'check', 'distZip'/*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check'
 
+apply plugin: 'java'
 apply from: "$rootDir/gradle/idea.gradle"
-apply from: "$rootDir/gradle/application.gradle"
 apply from: "$rootDir/gradle/logging.gradle"
 apply from: "$rootDir/gradle/groovy.gradle"
 apply from: "$rootDir/gradle/jacoco.gradle"
 apply from: "$rootDir/gradle/spock.gradle"
-apply from: "$rootDir/gradle/cucumber-jvm.gradle"
 apply from: "$rootDir/gradle/checkstyle.gradle"
 apply from: "$rootDir/gradle/codenarc.gradle"
 apply from: "$rootDir/gradle/version.gradle"
@@ -19,9 +18,6 @@ repositories {
 }
 
 jar {
-    manifest {
-        attributes 'Main-Class': 'org.farrukh.examples.Main'
-    }
     from {
 
         configurations.runtime.collect {

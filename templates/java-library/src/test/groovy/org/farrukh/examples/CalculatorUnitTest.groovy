@@ -1,10 +1,13 @@
 package org.farrukh.examples
 
+import org.farrukh.examples.category.UnitTestCategory
+import org.junit.experimental.categories.Category
 import spock.lang.Specification
 
 /**
  * Unit level test for the Calculator.
  */
+@Category(UnitTestCategory)
 class CalculatorUnitTest extends Specification {
 
     def 'should test add operation with integer parameters'() {
