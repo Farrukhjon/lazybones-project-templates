@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-defaultTasks 'clean', 'build', 'check', 'installDist'
+defaultTasks 'clean', 'build', 'check'
 
 apply from: "$rootDir/gradle/repositories.gradle"
 apply from: "$rootDir/gradle/idea.gradle"

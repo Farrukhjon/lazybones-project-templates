@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-defaultTasks 'clean', 'build', 'check', 'installDist'
+defaultTasks 'clean', 'build', 'check'
 
 apply plugin: 'java'
 apply plugin: 'idea'
