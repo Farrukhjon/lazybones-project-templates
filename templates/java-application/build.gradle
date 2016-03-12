@@ -1,6 +1,7 @@
-defaultTasks 'clean', 'build', 'check', 'installDist' /*, 'deleteDockerImage', 'deployWithAnsiblePlaybookToDockerContainer'*/
+defaultTasks 'clean', 'build', 'check', 'installDist'
 
-apply from: "$rootDir/gradle/idea.gradle"
+apply plugin: 'idea'
+
 apply from: "$rootDir/gradle/application.gradle"
 apply from: "$rootDir/gradle/logging.gradle"
 apply from: "$rootDir/gradle/groovy.gradle"
@@ -10,7 +11,6 @@ apply from: "$rootDir/gradle/cucumber-jvm.gradle"
 apply from: "$rootDir/gradle/checkstyle.gradle"
 apply from: "$rootDir/gradle/codenarc.gradle"
 apply from: "$rootDir/gradle/version.gradle"
-apply from: "$rootDir/gradle/testing.gradle"
 apply from: "$rootDir/gradle/maven-publish.gradle"
 apply from: "$rootDir/gradle/build-dashboard.gradle"
 

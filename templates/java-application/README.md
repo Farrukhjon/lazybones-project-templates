@@ -1,8 +1,8 @@
 # Overview
-Simple, stand-alone Java application.
+Simple, stand-alone Java application template.
 
 ### Tool dependencies
- - Programming language: Java8, Groovy 2.4.5
+ - Programming language: Java8, Groovy
  - Build automating tool: Gradle, IntelliJ IDEA
  - Testing tools: JUnit, Spock and Cucumber
  - Code quality: Checkstyle, CodeNarc
