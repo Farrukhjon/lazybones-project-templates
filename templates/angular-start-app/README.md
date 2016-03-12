@@ -2,7 +2,33 @@ Overview
 ----------
 AngularJS based, front-end application template.
 
-# Tools
+## Directory structure template is modular based, for enterprise app.
+```
+├── app
+│   ├── about
+│   │   ├── aboutView.html
+│   │   ├── controllers
+│   │   ├── directives
+│   │   ├── filters
+│   │   └── services
+│   ├── app.js
+│   ├── common
+│   │   ├── commonView.html
+│   │   ├── controllers
+│   │   ├── directives
+│   │   ├── filters
+│   │   └── services
+│   └── home
+│       ├── controllers
+│       ├── directives
+│       ├── filters
+│       ├── homeView.html
+│       └── services
+index.html
+
+```
+
+## Tools
  - bower
  - http-server
  - jasmine-core
@@ -11,7 +37,7 @@ AngularJS based, front-end application template.
  - karma-jasmine
  - protractor
  
-# Dependencies
+## Dependencies
  - angular
  - html5-boilerplate
  - bootstrap-css-only
