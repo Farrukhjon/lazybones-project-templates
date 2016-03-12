@@ -2,7 +2,7 @@ Overview
 ----------
 AngularJS based, front-end application template.
 
-# Tolls
+# Tools
  - bower
  - http-server
  - jasmine-core
