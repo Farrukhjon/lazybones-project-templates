@@ -12,9 +12,8 @@ defaultTasks 'clean', 'build', 'check'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply from: "$rootDir/gradle/repositories.gradle"
-apply from: "$rootDir/gradle/groovy.gradle"
-apply from: "$rootDir/gradle/application.gradle"
 apply from: "$rootDir/gradle/boot.gradle"
+apply from: "$rootDir/gradle/groovy.gradle"
 apply from: "$rootDir/gradle/jacoco.gradle"
 apply from: "$rootDir/gradle/spock.gradle"
 apply from: "$rootDir/gradle/cucumber-jvm.gradle"

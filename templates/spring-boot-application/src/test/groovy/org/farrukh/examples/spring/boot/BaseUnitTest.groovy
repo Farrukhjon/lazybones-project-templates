@@ -7,5 +7,5 @@ import org.junit.experimental.categories.Category
  * Base unit level class.
  */
 @Category(UnitTestCategory)
-class BaseUnitTest extends BaseTest {
+abstract class BaseUnitTest extends BaseTest {
 }
