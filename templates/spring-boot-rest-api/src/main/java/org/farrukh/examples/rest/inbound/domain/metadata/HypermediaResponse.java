@@ -19,6 +19,4 @@ import org.springframework.hateoas.ResourceSupport;
 
 public class HypermediaResponse extends ResourceSupport {
 
-
-
 }

@@ -29,6 +29,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Spring boot entry point class.
@@ -94,6 +97,20 @@ public class Application {
     @Bean
     public StorageOutboundGateway storageOutboundGateway(final ResourceRepository repository) {
         return new DefaultOutboundGateway(repository);
+    }
+
+    @Bean
+    public WebMvcConfigurer mvcCORSConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(final CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET")
+                        .maxAge(60)
+                        .allowCredentials(true);
+            }
+        };
     }
 
 }
