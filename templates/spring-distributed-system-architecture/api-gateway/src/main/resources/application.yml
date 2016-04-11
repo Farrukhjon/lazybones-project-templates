@@ -1,0 +1,8 @@
+zuul:
+  routes:
+     resource:
+        path: /users/**
+        url: http://localhost:8081
+     user:
+        path: /user/**
+        url: http://localhost:9999/uaa/user
