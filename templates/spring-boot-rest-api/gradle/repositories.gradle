@@ -4,4 +4,9 @@ repositories {
         name = 'kurron'
         url = 'http://dl.bintray.com/kurron/maven'
     }
+
+    maven {
+        url = 'https://repo.spring.io/milestone/'
+    }
+
 }

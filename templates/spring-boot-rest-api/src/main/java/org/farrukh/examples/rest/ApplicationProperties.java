@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+
 package org.farrukh.examples.rest;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

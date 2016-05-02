@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-    <contextName>TESTING</contextName>
     <property name="MESSAGE_FORMAT"
               value="%contextName %1(%.-1level) %10.10mdc{realm} %5.5mdc{service-code} %5.5mdc{service-instance} %10.10mdc{correlation-id} %4.4mdc{message-code} %35.35logger{0} %message %throwable{short}%n"/>
     

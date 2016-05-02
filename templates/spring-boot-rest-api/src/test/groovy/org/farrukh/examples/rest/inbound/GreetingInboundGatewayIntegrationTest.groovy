@@ -53,7 +53,7 @@ class GreetingInboundGatewayIntegrationTest extends BaseInboundIntegrationTest {
         def messageForConvert = new Greeting(message: 'hello world!')
 
         and: 'expected results'
-        def expectedMediaType = MediaType.valueOf('application/json;charset=UTF-8')
+        def expectedMediaType = MediaType.valueOf('application/hal+json;charset=UTF-8')
         def expectedMessage = 'HELLO WORLD!'
 
         and: 'the proper request is created'

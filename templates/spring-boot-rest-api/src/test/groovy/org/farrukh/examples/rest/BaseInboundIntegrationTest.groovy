@@ -17,8 +17,8 @@
 package org.farrukh.examples.rest
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.farrukh.examples.rest.category.InboundIntegrationTestCategory
 import org.junit.experimental.categories.Category
+import org.kurron.categories.InboundIntegrationTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.SpringApplicationContextLoader
@@ -30,7 +30,7 @@ import org.springframework.web.util.UriComponentsBuilder
 /**
  * Base integration test class based on spock specification and spring testing fetures.
  */
-@Category(InboundIntegrationTestCategory)
+@Category(InboundIntegrationTest)
 @WebIntegrationTest(randomPort = true)
 @ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
 abstract class BaseInboundIntegrationTest extends BaseTest {

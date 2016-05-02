@@ -14,15 +14,15 @@
  */
 package org.farrukh.examples.rest
 
-import org.farrukh.examples.rest.category.OutboundIntegrationTestCategory
 import org.junit.experimental.categories.Category
+import org.kurron.categories.OutboundIntegrationTest
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.test.context.ContextConfiguration
 
 /**
  * Base integration test class based on spock specification and spring testing fetures.
  */
-@Category(OutboundIntegrationTestCategory)
+@Category(OutboundIntegrationTest)
 @ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
 abstract class BaseOutboundIntegrationTest extends BaseTest {
 

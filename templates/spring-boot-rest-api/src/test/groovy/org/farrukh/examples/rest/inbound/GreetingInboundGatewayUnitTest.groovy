@@ -45,7 +45,7 @@ class GreetingInboundGatewayUnitTest extends BaseUnitTest {
 
     def 'should test successful retuning greeting'() {
         given: 'expected results'
-        def expectedContent = '''{"payload":{"message":"Hello World!"}}'''
+        def expectedContent = '''{"payload":{"message":"Hello World!"},"links":[]}'''
         def expectedStatusCode = HttpStatus.OK.value()
         def expectedMediaType = MediaType.APPLICATION_JSON_VALUE
 
@@ -66,7 +66,7 @@ class GreetingInboundGatewayUnitTest extends BaseUnitTest {
         given: 'expected results'
         def expectedMediaType = MediaType.APPLICATION_JSON_VALUE
         def expectedStatusCode = HttpStatus.OK.value()
-        def expectedResponse = '''{"payload":{"message":"HELLO WORLD!"}}'''
+        def expectedResponse = '''{"payload":{"message":"HELLO WORLD!"},"links":[{"rel":"self","href":"http://localhost/convert"}]}'''
 
         and: 'the request is created'
         def headers = new HttpHeaders()

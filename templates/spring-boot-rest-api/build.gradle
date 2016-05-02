@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,7 +16,7 @@ apply from: "$rootDir/gradle/boot.gradle"
 apply from: "$rootDir/gradle/groovy.gradle"
 apply from: "$rootDir/gradle/spock.gradle"
 apply from: "$rootDir/gradle/cucumber-jvm.gradle"
-/*apply from: "$rootDir/gradle/checkstyle.gradle"*/
+apply from: "$rootDir/gradle/checkstyle.gradle"
 apply from: "$rootDir/gradle/codenarc.gradle"
 apply from: "$rootDir/gradle/version.gradle"
 apply from: "$rootDir/gradle/testing.gradle"
@@ -32,14 +33,9 @@ if ('true' == runIntegrationTests) {
     defaultTasks += ['outboundIntegrationTests', 'inboundIntegrationTests', 'acceptanceTests']
 }
 
-task copyConfig(type: Copy) {
-    from 'src/main/resources'
-    into "$buildDir/libs"
-}
-
-if ('master' == branch) {
-    defaultTasks += ['copyConfig, publishToMavenLocal']
-}
+/*if ('master' == branch) {
+    defaultTasks += ['publishToMavenLocal']
+}*/
 
 
 

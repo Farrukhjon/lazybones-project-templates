@@ -41,6 +41,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class Application {
 
+    /**
+     * A request highest age.
+     */
+    private static final int MAX_AGE = 60;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
@@ -107,7 +112,7 @@ public class Application {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET")
-                        .maxAge(60)
+                        .maxAge(MAX_AGE)
                         .allowCredentials(true);
             }
         };
