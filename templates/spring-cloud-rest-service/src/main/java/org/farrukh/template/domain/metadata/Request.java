@@ -13,11 +13,27 @@
  * limitations under the License.
  *
  */
+package org.farrukh.template.domain.metadata;
 
-package org.farrukh.template.core;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.kurron.feedback.AbstractFeedbackAware;
+/**
+ * Represents a client request to the service.
+ * @param <T> the payload request body.
+ */
+public class Request<T> {
 
-public class CoreServiceImpl extends AbstractFeedbackAware implements CoreService {
+    /**
+     * Some payload in the request.
+     */
+    @JsonProperty
+    private T payload;
 
+    public T getPayload() {
+        return payload;
+    }
+
+    public void setPayload(final T payload) {
+        this.payload = payload;
+    }
 }
