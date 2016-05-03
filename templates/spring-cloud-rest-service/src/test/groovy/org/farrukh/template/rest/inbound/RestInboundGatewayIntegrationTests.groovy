@@ -17,6 +17,25 @@
 package org.farrukh.template.rest.inbound
 
 import org.farrukh.template.BaseInboundIntegrationTest
+import org.farrukh.template.rest.domain.Book
+import org.farrukh.template.rest.domain.metadata.Response
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
 
 class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
+
+    def 'exercise happy path for creating a book'() {
+        given:
+        def url = createUrl('/books')
+        def method = HttpMethod.POST
+        def book = new Book()
+        def requestEntity = new HttpEntity(book)
+
+        when:
+        def responseEntity = restTemplate.exchange(url, method, requestEntity, Response)
+
+        then:
+        responseEntity
+    }
+
 }

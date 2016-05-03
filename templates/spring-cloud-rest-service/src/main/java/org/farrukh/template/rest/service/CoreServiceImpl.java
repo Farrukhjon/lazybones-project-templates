@@ -14,7 +14,23 @@
  *
  */
 
-package org.farrukh.template.core;
+package org.farrukh.template.rest.service;
 
-public interface CoreService {
+import org.farrukh.template.rest.domain.Book;
+import org.farrukh.template.rest.outbound.StorageOutboundGateway;
+import org.kurron.feedback.AbstractFeedbackAware;
+
+public class CoreServiceImpl extends AbstractFeedbackAware implements CoreService {
+
+    private final StorageOutboundGateway storageOutboundGateway;
+
+    public CoreServiceImpl(final StorageOutboundGateway storageOutboundGateway) {
+        this.storageOutboundGateway = storageOutboundGateway;
+    }
+
+    @Override
+    public Book create(final Book book) {
+        return storageOutboundGateway.store(book);
+    }
+
 }

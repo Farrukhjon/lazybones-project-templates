@@ -13,27 +13,11 @@
  * limitations under the License.
  *
  */
-package org.farrukh.template.domain.metadata;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+package org.farrukh.template.rest.repository;
 
-/**
- * Represents a client request to the service.
- * @param <T> the payload request body.
- */
-public class Request<T> {
+import org.farrukh.template.rest.domain.Book;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-    /**
-     * Some payload in the request.
-     */
-    @JsonProperty
-    private T payload;
-
-    public T getPayload() {
-        return payload;
-    }
-
-    public void setPayload(final T payload) {
-        this.payload = payload;
-    }
+public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
 }

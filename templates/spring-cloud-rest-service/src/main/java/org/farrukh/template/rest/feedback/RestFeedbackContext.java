@@ -14,7 +14,7 @@
  *
  */
 
-package org.farrukh.template.feedback;
+package org.farrukh.template.rest.feedback;
 
 import org.kurron.feedback.Audience;
 import org.kurron.feedback.FeedbackContext;

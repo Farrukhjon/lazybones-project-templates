@@ -14,10 +14,26 @@
  *
  */
 
-package org.farrukh.template.core;
+package org.farrukh.template.rest.exception;
 
-import org.kurron.feedback.AbstractFeedbackAware;
+import org.kurron.feedback.FeedbackContext;
+import org.kurron.feedback.exceptions.AbstractError;
+import org.springframework.http.HttpStatus;
 
-public class CoreServiceImpl extends AbstractFeedbackAware implements CoreService {
+public class BookCreationError extends AbstractError {
+
+    public BookCreationError(final FeedbackContext context, final Object... arguments) {
+        super(context, arguments);
+    }
+
+    @Override
+    public HttpStatus getHttpStatus() {
+        return null;
+    }
+
+    @Override
+    public String getDeveloperMessage() {
+        return null;
+    }
 
 }

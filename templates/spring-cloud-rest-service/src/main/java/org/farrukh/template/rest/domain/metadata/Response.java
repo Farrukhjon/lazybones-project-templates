@@ -13,41 +13,44 @@
  * limitations under the License.
  *
  */
-package org.farrukh.template.domain.metadata;
+package org.farrukh.template.rest.domain.metadata;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.farrukh.template.rest.domain.Book;
 import org.springframework.hateoas.ResourceSupport;
+
+import java.util.List;
 
 /**
  * Response DTO.
  * Should warp a payload for REST client.
- * @param <T> payload type.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Response<T> extends ResourceSupport {
+public class Response extends ResourceSupport {
 
     /**
      * Holds some payload for this response.
      */
     @JsonProperty
-    private T payload;
+    private List<Book> books;
 
-    /**
-     * Gets a the payload.
-     * @return the response payload.
-     */
-    public T getPayload() {
-        return payload;
+    @JsonProperty("error")
+    private ErrorBlock errorBlock;
+
+    public List<Book> getBooks() {
+        return books;
     }
 
-    /**
-     * Sets a payload.
-     * @param payload some payload.
-     */
-    public void setPayload(final T payload) {
-        this.payload = payload;
+    public void setBooks(final List<Book> books) {
+        this.books = books;
     }
 
+    public ErrorBlock getErrorBlock() {
+        return errorBlock;
+    }
 
+    public void setErrorBlock(final ErrorBlock errorBlock) {
+        this.errorBlock = errorBlock;
+    }
 }

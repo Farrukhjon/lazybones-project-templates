@@ -13,8 +13,27 @@
  * limitations under the License.
  *
  */
+package org.farrukh.template.rest.domain.metadata;
 
-package org.farrukh.template.rest.outbound;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class StorageOutboundGatewayImpl implements StorageOutboundGateway {
+/**
+ * Represents a client request to the service.
+ * @param <T> the payload request body.
+ */
+public class Request<T> {
+
+    /**
+     * Some payload in the request.
+     */
+    @JsonProperty
+    private T payload;
+
+    public T getPayload() {
+        return payload;
+    }
+
+    public void setPayload(final T payload) {
+        this.payload = payload;
+    }
 }

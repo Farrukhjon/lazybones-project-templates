@@ -14,24 +14,26 @@
  *
  */
 
-package org.farrukh.template.rest.inbound
+package org.farrukh.template.rest.domain;
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import org.farrukh.template.BaseUnitTest
-import org.farrukh.template.rest.service.CoreService
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
+public class Author {
 
-class RestInboundGatewayUnitTests extends BaseUnitTest {
+    private String firstNamel;
+    private String lastNamel;
 
-    def coreService = Stub(CoreService)
-
-    MockMvc mockMvc
-
-    def mapper = new ObjectMapper()
-
-    def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService)).build()
+    public String getFirstNamel() {
+        return firstNamel;
     }
 
+    public void setFirstNamel(final String firstNamel) {
+        this.firstNamel = firstNamel;
+    }
+
+    public String getLastNamel() {
+        return lastNamel;
+    }
+
+    public void setLastNamel(final String lastNamel) {
+        this.lastNamel = lastNamel;
+    }
 }

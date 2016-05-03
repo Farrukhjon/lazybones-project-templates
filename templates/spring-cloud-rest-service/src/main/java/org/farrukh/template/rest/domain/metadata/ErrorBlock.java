@@ -14,7 +14,7 @@
  *
  */
 
-package org.farrukh.template.domain.metadata;
+package org.farrukh.template.rest.domain.metadata;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Responsible for holding an error information.
  */
-public class ErrorResponse {
+public class ErrorBlock {
 
     /**
      * The error code.
@@ -37,8 +37,8 @@ public class ErrorResponse {
     private final String message;
 
     @JsonCreator
-    public ErrorResponse(final int code,
-                         final String message) {
+    public ErrorBlock(final int code,
+                      final String message) {
         this.code = code;
         this.message = message;
     }

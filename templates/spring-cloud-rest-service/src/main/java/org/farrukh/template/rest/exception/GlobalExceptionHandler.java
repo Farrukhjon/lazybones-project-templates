@@ -14,9 +14,10 @@
  *
  */
 
-package org.farrukh.template.exception;
+package org.farrukh.template.rest.exception;
 
-import org.farrukh.template.domain.metadata.ErrorResponse;
+import org.farrukh.template.rest.domain.metadata.ErrorBlock;
+import org.farrukh.template.rest.domain.metadata.Response;
 import org.kurron.feedback.FeedbackAware;
 import org.kurron.feedback.FeedbackProvider;
 import org.kurron.feedback.NullFeedbackProvider;
@@ -25,6 +26,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * Provides Global Errors Handling.
+ */
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements FeedbackAware {
 
     /**
@@ -50,9 +54,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the response error.
      */
     @ExceptionHandler(AbstractError.class)
-    public ResponseEntity<ErrorResponse> handleApplicationException(final AbstractError error) {
-        return new ResponseEntity<ErrorResponse>(new ErrorResponse(error.getCode(), error.getMessage()), error.getHttpStatus());
+    public ResponseEntity<Response> handleApplicationException(final AbstractError error) {
+        Response response = new Response();
+        response.setErrorBlock(new ErrorBlock(error.getCode(), error.getMessage()));
+        return new ResponseEntity<>(response, error.getHttpStatus());
     }
-
 
 }

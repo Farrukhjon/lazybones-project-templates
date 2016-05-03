@@ -16,14 +16,19 @@
 
 package org.farrukh.template;
 
-import org.farrukh.template.core.CoreService;
-import org.farrukh.template.core.CoreServiceImpl;
+import org.farrukh.template.rest.outbound.MongoStorageOutboundGatewayImpl;
+import org.farrukh.template.rest.outbound.StorageOutboundGateway;
+import org.farrukh.template.rest.repository.BookRepository;
+import org.farrukh.template.rest.service.CoreService;
+import org.farrukh.template.rest.service.CoreServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
+@EnableCaching
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableConfigurationProperties(ApplicationProperties.class)
@@ -34,7 +39,13 @@ public class Application {
 	}
 
 	@Bean
-	public CoreService coreService() {
-		return new CoreServiceImpl();
+	public CoreService coreService(final StorageOutboundGateway storageOutboundGateway) {
+		return new CoreServiceImpl(storageOutboundGateway);
 	}
+
+	@Bean
+	public StorageOutboundGateway storageOutboundGateway(final BookRepository bookRepository) {
+		return new MongoStorageOutboundGatewayImpl(bookRepository);
+	}
+
 }

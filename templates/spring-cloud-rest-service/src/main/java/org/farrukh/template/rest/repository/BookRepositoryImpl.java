@@ -14,24 +14,7 @@
  *
  */
 
-package org.farrukh.template.rest.inbound
+package org.farrukh.template.rest.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import org.farrukh.template.BaseUnitTest
-import org.farrukh.template.rest.service.CoreService
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-
-class RestInboundGatewayUnitTests extends BaseUnitTest {
-
-    def coreService = Stub(CoreService)
-
-    MockMvc mockMvc
-
-    def mapper = new ObjectMapper()
-
-    def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService)).build()
-    }
-
+public class BookRepositoryImpl implements BookRepositoryCustom {
 }
