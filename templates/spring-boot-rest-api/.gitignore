@@ -99,7 +99,6 @@ gradle-app.setting
 !gradle-wrapper.jar
 ### NetBeans template
 nbproject/private/
-build/
 nbbuild/
 dist/
 nbdist/
