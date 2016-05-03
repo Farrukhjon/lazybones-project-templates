@@ -20,11 +20,13 @@ import org.farrukh.template.core.CoreService;
 import org.farrukh.template.core.CoreServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableConfigurationProperties(ApplicationProperties.class)
 public class Application {
 
 	public static void main(String[] args) {
