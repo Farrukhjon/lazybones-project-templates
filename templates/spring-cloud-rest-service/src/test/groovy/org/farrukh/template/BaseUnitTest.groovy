@@ -19,6 +19,9 @@ package org.farrukh.template
 import org.junit.experimental.categories.Category
 import org.kurron.categories.UnitTest
 
+/**
+ * Base Unit Level Class.
+ */
 @Category(UnitTest)
 abstract class BaseUnitTest extends BaseTest {
 }

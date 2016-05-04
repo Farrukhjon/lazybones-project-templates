@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.farrukh.template.rest.domain.Book;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.http.MediaType;
 
 import java.util.List;
 
@@ -28,6 +29,26 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response extends ResourceSupport {
+
+    /**
+     * Json MIME type for the response.
+     */
+    public static final String JSON_MIME_TYPE = "application/json;type=app-name;version=1.0.0";
+
+    /**
+     * Json media type type for the response.
+     */
+    public static final MediaType JSON_MEDIA_TYPE = MediaType.valueOf(JSON_MIME_TYPE);
+
+    /**
+     * Custom text MIME type for the requesting text data.
+     */
+    public static final String TEXT_MIME_TYPE = "text/plain;type=app-name;version=1.0.0";
+
+    /**
+     * Custom text Media type type for the requesting text data.
+     */
+    public static final MediaType TEXT_MEDIA_TYPE = MediaType.valueOf(TEXT_MIME_TYPE);
 
     /**
      * Holds some payload for this response.

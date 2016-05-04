@@ -22,6 +22,9 @@ import org.farrukh.template.rest.service.CoreService
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
+/**
+ * Unit level tests against REST Inbound Gateway.
+ */
 class RestInboundGatewayUnitTests extends BaseUnitTest {
 
     def coreService = Stub(CoreService)

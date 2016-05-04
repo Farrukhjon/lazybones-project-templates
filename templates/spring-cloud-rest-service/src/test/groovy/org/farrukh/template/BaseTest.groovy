@@ -18,5 +18,9 @@ package org.farrukh.template
 
 import spock.lang.Specification
 
+/**
+ * Base test class.
+ * Supports sock test functionaries.
+ */
 abstract class BaseTest extends Specification {
 }
