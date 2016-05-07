@@ -14,10 +14,25 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.domain.resource;
 
 import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.farrukh.template.rest.inbound.RestInboundGateway;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+/**
+ * Created by Farrukhjon D. Sattorov on 5/7/16.
+ */
+public class BookResourceAssembler extends ResourceAssemblerSupport<Book, BookResource> {
+
+    public BookResourceAssembler() {
+        super(RestInboundGateway.class, BookResource.class);
+    }
+
+    @Override
+    public BookResource toResource(final Book book) {
+        BookResource bookResource = createResourceWithId(book.getId(), book);
+        bookResource.setBook(book);
+        return bookResource;
+    }
 }

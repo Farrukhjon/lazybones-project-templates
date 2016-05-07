@@ -16,10 +16,9 @@
 
 package org.farrukh.template.rest.outbound;
 
-import org.farrukh.template.rest.domain.Book;
+import org.farrukh.template.rest.domain.model.Book;
 import org.farrukh.template.rest.repository.BookRepository;
 import org.kurron.feedback.AbstractFeedbackAware;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class MongoStorageOutboundGatewayImpl extends AbstractFeedbackAware imple
         return bookRepository.findOne(id);
     }
 
-    @Cacheable("books")
+    /*@Cacheable("books")*/
     @Override
     public List<Book> retrieveAll() {
         return bookRepository.findAll();

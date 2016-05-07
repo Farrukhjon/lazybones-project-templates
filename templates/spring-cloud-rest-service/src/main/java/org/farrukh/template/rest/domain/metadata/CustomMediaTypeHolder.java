@@ -14,10 +14,20 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.domain.metadata;
 
-import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.http.MediaType;
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+/**
+ * Created by Farrukhjon D. Sattorov on 5/7/16.
+ */
+public class CustomMediaTypeHolder {
+    /**
+     * Json MIME type for the response.
+     */
+    public static final String JSON_MIME_TYPE = "application/json;type=app;version=1.0.0;charset=UTF-8";
+    /**
+     * Json media type type for the response.
+     */
+    public static final MediaType JSON_MEDIA_TYPE = MediaType.valueOf(JSON_MIME_TYPE);
 }

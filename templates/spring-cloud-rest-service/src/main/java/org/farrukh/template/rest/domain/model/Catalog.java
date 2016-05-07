@@ -14,26 +14,22 @@
  *
  */
 
-package org.farrukh.template.rest.domain;
+package org.farrukh.template.rest.domain.model;
 
-public class Author {
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-    private String firstNamel;
-    private String lastNamel;
+import java.util.List;
 
-    public String getFirstNamel() {
-        return firstNamel;
-    }
+/**
+ * Created by Farrukhjon D. Sattorov on 5/7/16.
+ */
+@Data
+@Document(collection = "catalogs")
+public class Catalog {
 
-    public void setFirstNamel(final String firstNamel) {
-        this.firstNamel = firstNamel;
-    }
+    private String name;
 
-    public String getLastNamel() {
-        return lastNamel;
-    }
+    private List<Book> books;
 
-    public void setLastNamel(final String lastNamel) {
-        this.lastNamel = lastNamel;
-    }
 }

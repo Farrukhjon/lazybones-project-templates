@@ -16,11 +16,16 @@
 
 package org.farrukh.template.rest.service;
 
-import org.farrukh.template.rest.domain.Book;
+import org.farrukh.template.rest.domain.model.Book;
+
+import java.util.List;
 
 public interface CoreService {
 
 
     Book create(final Book book);
 
+    Book getBookById(String id);
+
+    List<Book> getBooks();
 }

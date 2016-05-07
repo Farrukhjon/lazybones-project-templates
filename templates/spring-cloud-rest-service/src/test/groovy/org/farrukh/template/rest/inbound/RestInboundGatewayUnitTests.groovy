@@ -17,10 +17,13 @@
 package org.farrukh.template.rest.inbound
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import org.farrukh.template.BaseUnitTest
 import org.farrukh.template.rest.service.CoreService
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import spock.lang.Shared
 
 /**
  * Unit level tests against REST Inbound Gateway.
@@ -31,10 +34,19 @@ class RestInboundGatewayUnitTests extends BaseUnitTest {
 
     MockMvc mockMvc
 
-    def mapper = new ObjectMapper()
+    @Shared
+    ObjectMapper mapper
+
+    def setupSpec() {
+        mapper = new Jackson2ObjectMapperBuilder()
+                .featuresToEnable(SerializationFeature.INDENT_OUTPUT)
+                .featuresToDisable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+                .build()
+    }
 
     def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService)).build()
+        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService, assembler)).build()
+
     }
 
 }

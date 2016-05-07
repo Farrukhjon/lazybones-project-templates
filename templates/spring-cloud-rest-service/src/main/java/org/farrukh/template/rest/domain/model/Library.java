@@ -14,44 +14,24 @@
  *
  */
 
-package org.farrukh.template.rest.domain;
+package org.farrukh.template.rest.domain.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Data;
 
 import java.util.List;
 
-@Document
-public class Book {
+/**
+ * Created by Farrukhjon D. Sattorov on 5/7/16.
+ */
 
-    @Id
+@Data
+public class Library {
+
     private String id;
 
     private String name;
 
-    private List<Author> authors;
+    private List<Catalog> catalogs;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(final List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
 }

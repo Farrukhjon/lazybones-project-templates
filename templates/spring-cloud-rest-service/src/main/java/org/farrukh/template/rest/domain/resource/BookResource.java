@@ -14,10 +14,19 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.domain.resource;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
 import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.hateoas.ResourceSupport;
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BookResource extends ResourceSupport {
+
+    private Book book;
+
 }

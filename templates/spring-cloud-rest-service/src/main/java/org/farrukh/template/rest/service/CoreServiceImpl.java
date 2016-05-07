@@ -16,9 +16,11 @@
 
 package org.farrukh.template.rest.service;
 
-import org.farrukh.template.rest.domain.Book;
+import org.farrukh.template.rest.domain.model.Book;
 import org.farrukh.template.rest.outbound.StorageOutboundGateway;
 import org.kurron.feedback.AbstractFeedbackAware;
+
+import java.util.List;
 
 public class CoreServiceImpl extends AbstractFeedbackAware implements CoreService {
 
@@ -31,6 +33,16 @@ public class CoreServiceImpl extends AbstractFeedbackAware implements CoreServic
     @Override
     public Book create(final Book book) {
         return storageOutboundGateway.store(book);
+    }
+
+    @Override
+    public Book getBookById(final String id) {
+        return storageOutboundGateway.retrieve(id);
+    }
+
+    @Override
+    public List<Book> getBooks() {
+        return storageOutboundGateway.retrieveAll();
     }
 
 }

@@ -14,10 +14,19 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.config
 
-import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.boot.test.TestRestTemplate
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.client.RestOperations
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+@Configuration
+class IntegrationTestsConfig {
+
+    @Bean
+    public RestOperations restTemplate() {
+        return new TestRestTemplate()
+    }
+
 }

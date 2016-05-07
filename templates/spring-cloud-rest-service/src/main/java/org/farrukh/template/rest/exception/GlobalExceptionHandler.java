@@ -17,7 +17,6 @@
 package org.farrukh.template.rest.exception;
 
 import org.farrukh.template.rest.domain.metadata.ErrorBlock;
-import org.farrukh.template.rest.domain.metadata.Response;
 import org.kurron.feedback.FeedbackAware;
 import org.kurron.feedback.FeedbackProvider;
 import org.kurron.feedback.NullFeedbackProvider;
@@ -54,10 +53,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the response error.
      */
     @ExceptionHandler(AbstractError.class)
-    public ResponseEntity<Response> handleApplicationException(final AbstractError error) {
-        Response response = new Response();
-        response.setErrorBlock(new ErrorBlock(error.getCode(), error.getMessage()));
-        return new ResponseEntity<>(response, error.getHttpStatus());
+    public ResponseEntity<ErrorBlock> handleApplicationException(final AbstractError error) {
+        ErrorBlock errorBlock = new ErrorBlock(error.getCode(), error.getMessage());
+        return new ResponseEntity<>(errorBlock, error.getHttpStatus());
     }
 
 }

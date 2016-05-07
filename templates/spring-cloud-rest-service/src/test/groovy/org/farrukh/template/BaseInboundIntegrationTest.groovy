@@ -43,14 +43,14 @@ abstract class BaseInboundIntegrationTest extends BaseIntegrationTest {
      * @param path the request mapped path
      * @return uri in string.
      */
-    String createUrl(String path) {
+    def createUrl(String path) {
         UriComponentsBuilder.newInstance().
                 scheme('http').
                 host('localhost').
                 port(port).
                 path(path).
                 build().
-                toUriString()
+                toUri()
     }
 
 }

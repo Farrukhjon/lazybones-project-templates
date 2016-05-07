@@ -1,11 +1,10 @@
 /*
  * Copyright (c) 2015. Farrukhjon D. Sattorov firedandy@gmail.com.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,11 +13,20 @@
  * limitations under the License.
  *
  */
-package org.farrukh.examples.rest.inbound;
 
-/**
- * Inbound gateway.
- */
+package org.farrukh.template.rest.domain.resource;
 
-public interface InboundGateway {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
+import org.farrukh.template.rest.domain.model.Library;
+import org.springframework.hateoas.ResourceSupport;
+
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class LibraryResource extends ResourceSupport {
+
+    private Library library;
+
 }

@@ -17,25 +17,57 @@
 package org.farrukh.template.rest.inbound
 
 import org.farrukh.template.BaseInboundIntegrationTest
-import org.farrukh.template.rest.domain.Book
-import org.farrukh.template.rest.domain.metadata.Response
-import org.springframework.http.HttpEntity
+import org.farrukh.template.rest.domain.metadata.CustomMediaTypeHolder
+import org.farrukh.template.rest.domain.model.Author
+import org.farrukh.template.rest.domain.model.Book
+import org.farrukh.template.rest.domain.resource.BookResource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
+import org.springframework.http.RequestEntity
 
 class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
 
     def 'exercise happy path for creating a book'() {
+        given: 'expected response data'
+        def expectedResponseStatusCode = HttpStatus.CREATED
+
+        and: 'proper request is created'
+        def url = createUrl('/books')
+        def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
+
+        def headers = new HttpHeaders()
+        headers.setContentType(CustomMediaTypeHolder.JSON_MEDIA_TYPE)
+        headers.setAccept([CustomMediaTypeHolder.JSON_MEDIA_TYPE])
+        def request = new RequestEntity<>(book, headers, HttpMethod.POST, url)
+
+        when: 'the request is made'
+        def response = restTemplate.exchange(request, BookResource)
+
+        then: 'expected response should be returned'
+        response.statusCode == expectedResponseStatusCode
+    }
+
+    def 'exercise happy path for retrieving a book'() {
         given:
         def url = createUrl('/books')
-        def method = HttpMethod.POST
-        def book = new Book()
-        def requestEntity = new HttpEntity(book)
+
+        and:
+        def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
+        def headers = new HttpHeaders()
+        headers.setContentType(CustomMediaTypeHolder.JSON_MEDIA_TYPE)
+        headers.setAccept([CustomMediaTypeHolder.JSON_MEDIA_TYPE])
+        def tmpRequest = new RequestEntity<>(book, headers, HttpMethod.POST, url)
+        def tmpResponse = restTemplate.exchange(tmpRequest, BookResource)
+
+        and:
+        def request = new RequestEntity<>(book, headers, HttpMethod.GET, createUrl("/books/${tmpResponse.body.book.id}"))
 
         when:
-        def responseEntity = restTemplate.exchange(url, method, requestEntity, Response)
+        def response = restTemplate.exchange(request, BookResource)
 
         then:
-        responseEntity
+        response.statusCode == HttpStatus.OK
     }
 
 }

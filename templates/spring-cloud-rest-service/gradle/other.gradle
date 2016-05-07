@@ -14,5 +14,6 @@
  */
 
 dependencies {
+    compile("org.projectlombok:lombok:${lombokVersion}")
     compile("org.kurron:tools-java:${toolsJavaVersion}")
 }

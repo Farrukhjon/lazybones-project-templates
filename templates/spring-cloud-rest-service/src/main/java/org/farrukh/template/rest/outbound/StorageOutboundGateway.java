@@ -16,7 +16,7 @@
 
 package org.farrukh.template.rest.outbound;
 
-import org.farrukh.template.rest.domain.Book;
+import org.farrukh.template.rest.domain.model.Book;
 
 import java.util.List;
 

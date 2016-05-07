@@ -13,27 +13,28 @@
  * limitations under the License.
  *
  */
-package org.farrukh.template.rest.domain.metadata;
 
+package org.farrukh.template.rest.domain.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * Represents a client request to the service.
- * @param <T> the payload request body.
- */
-public class Request<T> {
+import java.util.List;
 
-    /**
-     * Some payload in the request.
-     */
+@Data
+@Document(collection = "books")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Book {
+
+    @Id
+    private String id;
+
     @JsonProperty
-    private T payload;
+    private String name;
 
-    public T getPayload() {
-        return payload;
-    }
+    private List<Author> authors;
 
-    public void setPayload(final T payload) {
-        this.payload = payload;
-    }
 }

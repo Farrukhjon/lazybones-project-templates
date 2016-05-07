@@ -14,10 +14,15 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.domain.model;
 
-import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import lombok.Data;
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+@Data
+public class Author {
+
+    private String firstName;
+
+    private String lastName;
+
 }

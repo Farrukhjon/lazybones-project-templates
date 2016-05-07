@@ -16,6 +16,7 @@
 
 package org.farrukh.template;
 
+import org.farrukh.template.rest.domain.resource.BookResourceAssembler;
 import org.farrukh.template.rest.outbound.MongoStorageOutboundGatewayImpl;
 import org.farrukh.template.rest.outbound.StorageOutboundGateway;
 import org.farrukh.template.rest.repository.BookRepository;
@@ -34,18 +35,23 @@ import org.springframework.context.annotation.Bean;
 @EnableConfigurationProperties(ApplicationProperties.class)
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-	@Bean
-	public CoreService coreService(final StorageOutboundGateway storageOutboundGateway) {
-		return new CoreServiceImpl(storageOutboundGateway);
-	}
+    @Bean
+    public CoreService coreService(final StorageOutboundGateway storageOutboundGateway) {
+        return new CoreServiceImpl(storageOutboundGateway);
+    }
 
-	@Bean
-	public StorageOutboundGateway storageOutboundGateway(final BookRepository bookRepository) {
-		return new MongoStorageOutboundGatewayImpl(bookRepository);
-	}
+    @Bean
+    public StorageOutboundGateway storageOutboundGateway(final BookRepository bookRepository) {
+        return new MongoStorageOutboundGatewayImpl(bookRepository);
+    }
+
+    @Bean
+    public BookResourceAssembler bookResourceAssembler() {
+        return new BookResourceAssembler();
+    }
 
 }
