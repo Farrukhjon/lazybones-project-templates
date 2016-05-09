@@ -23,9 +23,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
-@Document(collection = "books")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Book {
 
@@ -35,6 +35,13 @@ public class Book {
     @JsonProperty
     private String name;
 
+    @JsonProperty
     private List<Author> authors;
+
+    @JsonProperty
+    private String publisher;
+
+    @JsonProperty
+    private UUID isbn;
 
 }

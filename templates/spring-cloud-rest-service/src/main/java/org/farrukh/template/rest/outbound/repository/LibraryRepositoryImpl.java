@@ -14,19 +14,7 @@
  *
  */
 
-package org.farrukh.template.rest.domain.resource;
+package org.farrukh.template.rest.outbound.repository;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.hateoas.ResourceSupport;
-
-@Getter
-@Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class BookResource extends ResourceSupport {
-
-    private Book book;
-
+public class LibraryRepositoryImpl implements LibraryRepositoryCustom {
 }

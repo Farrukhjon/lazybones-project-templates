@@ -16,44 +16,44 @@
 
 package org.farrukh.template.rest.outbound;
 
-import org.farrukh.template.rest.domain.model.Book;
-import org.farrukh.template.rest.repository.BookRepository;
+import org.farrukh.template.rest.domain.model.Library;
+import org.farrukh.template.rest.outbound.repository.LibraryRepository;
 import org.kurron.feedback.AbstractFeedbackAware;
 
 import java.util.List;
 
 public class MongoStorageOutboundGatewayImpl extends AbstractFeedbackAware implements StorageOutboundGateway {
 
-    private final BookRepository bookRepository;
+    private final LibraryRepository libraryRepository;
 
-    public MongoStorageOutboundGatewayImpl(final BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public MongoStorageOutboundGatewayImpl(final LibraryRepository libraryRepository) {
+        this.libraryRepository = libraryRepository;
     }
 
     @Override
-    public Book store(final Book book) {
-        return bookRepository.save(book);
+    public Library store(final Library library) {
+        return libraryRepository.save(library);
     }
 
     @Override
-    public Book retrieve(final String id) {
-        return bookRepository.findOne(id);
+    public Library retrieve(final String id) {
+        return libraryRepository.findOne(id);
     }
 
-    /*@Cacheable("books")*/
+    /*@Cacheable("librarys")*/
     @Override
-    public List<Book> retrieveAll() {
-        return bookRepository.findAll();
+    public List<Library> retrieveAll() {
+        return libraryRepository.findAll();
     }
 
     @Override
-    public void remove(final Book book) {
-        bookRepository.delete(book);
+    public void remove(final Library library) {
+        libraryRepository.delete(library);
     }
 
     @Override
     public void remove(final String id) {
-        bookRepository.delete(id);
+        libraryRepository.delete(id);
     }
 
 }

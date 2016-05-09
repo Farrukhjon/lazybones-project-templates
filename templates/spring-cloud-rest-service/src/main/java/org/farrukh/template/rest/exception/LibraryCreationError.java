@@ -14,10 +14,26 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.exception;
 
-import org.farrukh.template.rest.domain.model.Book;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.kurron.feedback.FeedbackContext;
+import org.kurron.feedback.exceptions.AbstractError;
+import org.springframework.http.HttpStatus;
 
-public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
+public class LibraryCreationError extends AbstractError {
+
+    public LibraryCreationError(final FeedbackContext context, final Object... arguments) {
+        super(context, arguments);
+    }
+
+    @Override
+    public HttpStatus getHttpStatus() {
+        return null;
+    }
+
+    @Override
+    public String getDeveloperMessage() {
+        return null;
+    }
+
 }

@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: development
+  application:
+    name: spring-cloud-rest-service
+
+---
+spring:
+  profiles: development
+  cloud:
+    config:
+      enabled: false
+eureka:
+  client:
+    enabled: false

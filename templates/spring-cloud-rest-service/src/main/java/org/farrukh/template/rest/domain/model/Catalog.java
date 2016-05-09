@@ -17,7 +17,6 @@
 package org.farrukh.template.rest.domain.model;
 
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
@@ -25,8 +24,9 @@ import java.util.List;
  * Created by Farrukhjon D. Sattorov on 5/7/16.
  */
 @Data
-@Document(collection = "catalogs")
 public class Catalog {
+
+    private String id;
 
     private String name;
 

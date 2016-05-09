@@ -16,7 +16,7 @@
 
 package org.farrukh.template.rest.service;
 
-import org.farrukh.template.rest.domain.model.Book;
+import org.farrukh.template.rest.domain.model.Library;
 import org.farrukh.template.rest.outbound.StorageOutboundGateway;
 import org.kurron.feedback.AbstractFeedbackAware;
 
@@ -31,17 +31,17 @@ public class CoreServiceImpl extends AbstractFeedbackAware implements CoreServic
     }
 
     @Override
-    public Book create(final Book book) {
+    public Library create(final Library book) {
         return storageOutboundGateway.store(book);
     }
 
     @Override
-    public Book getBookById(final String id) {
+    public Library getLibraryById(final String id) {
         return storageOutboundGateway.retrieve(id);
     }
 
     @Override
-    public List<Book> getBooks() {
+    public List<Library> getLibraries() {
         return storageOutboundGateway.retrieveAll();
     }
 

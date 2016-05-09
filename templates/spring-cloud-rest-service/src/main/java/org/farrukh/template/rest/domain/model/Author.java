@@ -25,4 +25,6 @@ public class Author {
 
     private String lastName;
 
+    private String email;
+
 }

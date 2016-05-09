@@ -27,7 +27,7 @@ version = new ProjectVersion(major.toInteger(), minor.toInteger(), patch.toInteg
 description = projectDescription
 
 task printVersion() {
-    group = 'org.farrukh.examples'
+    group = 'org.farrukh.template'
     description = 'Prints project version'
     doLast {
         logger.quiet "Version: ${version}"

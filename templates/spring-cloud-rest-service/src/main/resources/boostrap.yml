@@ -1,4 +1,0 @@
-spring:
-  profiles: development
-  application:
-    name: spring-cloud-rest-service

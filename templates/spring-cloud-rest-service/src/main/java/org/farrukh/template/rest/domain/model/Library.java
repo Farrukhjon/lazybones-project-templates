@@ -16,7 +16,9 @@
 
 package org.farrukh.template.rest.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ import java.util.List;
  */
 
 @Data
+@Document(collection = "libraries")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Library {
 
     private String id;

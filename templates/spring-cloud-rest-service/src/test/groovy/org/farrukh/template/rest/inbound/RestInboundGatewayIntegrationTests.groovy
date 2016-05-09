@@ -20,7 +20,7 @@ import org.farrukh.template.BaseInboundIntegrationTest
 import org.farrukh.template.rest.domain.metadata.CustomMediaTypeHolder
 import org.farrukh.template.rest.domain.model.Author
 import org.farrukh.template.rest.domain.model.Book
-import org.farrukh.template.rest.domain.resource.BookResource
+import org.farrukh.template.rest.domain.resource.LibraryResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
@@ -28,12 +28,14 @@ import org.springframework.http.RequestEntity
 
 class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
 
-    def 'exercise happy path for creating a book'() {
+    private String baseURL = '/libraries'
+
+    def 'exercise happy path for creating a library'() {
         given: 'expected response data'
         def expectedResponseStatusCode = HttpStatus.CREATED
 
         and: 'proper request is created'
-        def url = createUrl('/books')
+        def url = createUrl(baseURL)
         def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
 
         def headers = new HttpHeaders()
@@ -42,15 +44,15 @@ class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
         def request = new RequestEntity<>(book, headers, HttpMethod.POST, url)
 
         when: 'the request is made'
-        def response = restTemplate.exchange(request, BookResource)
+        def response = restTemplate.exchange(request, LibraryResource)
 
         then: 'expected response should be returned'
         response.statusCode == expectedResponseStatusCode
     }
 
-    def 'exercise happy path for retrieving a book'() {
+    def 'exercise happy path for retrieving a library'() {
         given:
-        def url = createUrl('/books')
+        def url = createUrl(baseURL)
 
         and:
         def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
@@ -58,13 +60,13 @@ class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
         headers.setContentType(CustomMediaTypeHolder.JSON_MEDIA_TYPE)
         headers.setAccept([CustomMediaTypeHolder.JSON_MEDIA_TYPE])
         def tmpRequest = new RequestEntity<>(book, headers, HttpMethod.POST, url)
-        def tmpResponse = restTemplate.exchange(tmpRequest, BookResource)
+        def tmpResponse = restTemplate.exchange(tmpRequest, LibraryResource)
 
         and:
         def request = new RequestEntity<>(book, headers, HttpMethod.GET, createUrl("/books/${tmpResponse.body.book.id}"))
 
         when:
-        def response = restTemplate.exchange(request, BookResource)
+        def response = restTemplate.exchange(request, LibraryResource)
 
         then:
         response.statusCode == HttpStatus.OK

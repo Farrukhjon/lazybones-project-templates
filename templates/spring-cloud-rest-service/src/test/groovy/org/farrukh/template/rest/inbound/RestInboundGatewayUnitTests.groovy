@@ -45,7 +45,8 @@ class RestInboundGatewayUnitTests extends BaseUnitTest {
     }
 
     def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService, assembler)).build()
+        mockMvc = MockMvcBuilders.standaloneSetup(new RestInboundGateway(coreService,
+                                                                         indexResourceAssembler, assembler)).build()
 
     }
 

@@ -14,7 +14,21 @@
  *
  */
 
-package org.farrukh.template.rest.repository;
+package org.farrukh.template.rest.domain.resource;
 
-public interface BookRepositoryCustom {
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.hateoas.ResourceSupport;
+
+/**
+ * Created by Farrukhjon D. Sattorov on 5/7/16.
+ */
+@Getter
+@Setter
+public class IndexResource extends ResourceSupport {
+
+    private String name;
+
+    private String description;
+
 }

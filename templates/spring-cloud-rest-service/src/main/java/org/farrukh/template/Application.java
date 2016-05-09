@@ -16,10 +16,10 @@
 
 package org.farrukh.template;
 
-import org.farrukh.template.rest.domain.resource.BookResourceAssembler;
+import org.farrukh.template.rest.domain.resource.assembler.LibraryResourceAssembler;
 import org.farrukh.template.rest.outbound.MongoStorageOutboundGatewayImpl;
 import org.farrukh.template.rest.outbound.StorageOutboundGateway;
-import org.farrukh.template.rest.repository.BookRepository;
+import org.farrukh.template.rest.outbound.repository.LibraryRepository;
 import org.farrukh.template.rest.service.CoreService;
 import org.farrukh.template.rest.service.CoreServiceImpl;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +28,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.RelProvider;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableCaching
 @EnableDiscoveryClient
 @SpringBootApplication
@@ -45,13 +49,13 @@ public class Application {
     }
 
     @Bean
-    public StorageOutboundGateway storageOutboundGateway(final BookRepository bookRepository) {
-        return new MongoStorageOutboundGatewayImpl(bookRepository);
+    public StorageOutboundGateway storageOutboundGateway(final LibraryRepository libraryRepository) {
+        return new MongoStorageOutboundGatewayImpl(libraryRepository);
     }
 
     @Bean
-    public BookResourceAssembler bookResourceAssembler() {
-        return new BookResourceAssembler();
+    public LibraryResourceAssembler libraryResourceAssembler() {
+        return new LibraryResourceAssembler();
     }
 
 }

@@ -16,19 +16,19 @@
 
 package org.farrukh.template.rest.outbound;
 
-import org.farrukh.template.rest.domain.model.Book;
+import org.farrukh.template.rest.domain.model.Library;
 
 import java.util.List;
 
 public interface StorageOutboundGateway {
 
-    Book store(final Book book);
+    Library store(final Library Library);
 
-    Book retrieve(final String id);
+    Library retrieve(final String id);
 
-    List<Book> retrieveAll();
+    List<Library> retrieveAll();
 
-    void remove(final Book book);
+    void remove(final Library Library);
 
     void remove(final String id);
 
