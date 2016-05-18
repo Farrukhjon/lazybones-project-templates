@@ -47,6 +47,13 @@ public class MongoStorageOutboundGatewayImpl extends AbstractFeedbackAware imple
     }
 
     @Override
+    public void modify(final Library library, final String id) {
+        Library libraryToUpdate = libraryRepository.findOne(id);
+        libraryToUpdate.setName(library.getName());
+        libraryRepository.save(libraryToUpdate);
+    }
+
+    @Override
     public void remove(final Library library) {
         libraryRepository.delete(library);
     }

@@ -28,6 +28,8 @@ public interface StorageOutboundGateway {
 
     List<Library> retrieveAll();
 
+    void modify(final Library library, final String id);
+
     void remove(final Library Library);
 
     void remove(final String id);

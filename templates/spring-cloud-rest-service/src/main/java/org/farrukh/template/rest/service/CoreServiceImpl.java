@@ -45,4 +45,9 @@ public class CoreServiceImpl extends AbstractFeedbackAware implements CoreServic
         return storageOutboundGateway.retrieveAll();
     }
 
+    @Override
+    public void update(final Library library, final String id) {
+        storageOutboundGateway.modify(library, id);
+    }
+
 }

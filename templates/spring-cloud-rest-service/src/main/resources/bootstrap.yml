@@ -1,15 +1,15 @@
 spring:
-  profiles:
-    active: development
   application:
     name: spring-cloud-rest-service
-
+  profiles:
+    active: testing
 ---
 spring:
-  profiles: development
+  profiles: testing
   cloud:
     config:
-      enabled: false
+      discovery:
+        enabled: false
 eureka:
   client:
     enabled: false

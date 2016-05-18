@@ -18,10 +18,11 @@ package org.farrukh.template.rest.inbound;
 
 import org.farrukh.template.rest.domain.metadata.CustomMediaTypeHolder;
 import org.farrukh.template.rest.domain.model.Library;
-import org.farrukh.template.rest.domain.resource.IndexResource;
 import org.farrukh.template.rest.domain.resource.LibraryResource;
 import org.farrukh.template.rest.domain.resource.assembler.LibraryResourceAssembler;
 import org.farrukh.template.rest.exception.LibraryCreationError;
+import org.farrukh.template.rest.exception.LibraryModificationError;
+import org.farrukh.template.rest.exception.LibraryRetrievalError;
 import org.farrukh.template.rest.feedback.RestFeedbackContext;
 import org.farrukh.template.rest.service.CoreService;
 import org.kurron.feedback.AbstractFeedbackAware;
@@ -40,7 +41,7 @@ import java.util.List;
 
 @ExposesResourceFor(LibraryResource.class)
 @RestController
-@RequestMapping(value = "/", produces = CustomMediaTypeHolder.JSON_MIME_TYPE)
+@RequestMapping(value = "/libraries", produces = CustomMediaTypeHolder.JSON_MIME_TYPE)
 public class RestInboundGateway extends AbstractFeedbackAware {
 
     private final CoreService coreService;
@@ -54,7 +55,7 @@ public class RestInboundGateway extends AbstractFeedbackAware {
         this.assembler = assembler;
     }
 
-    @RequestMapping(value = "/libraries", method = RequestMethod.POST, consumes = CustomMediaTypeHolder.JSON_MIME_TYPE)
+    @RequestMapping(method = RequestMethod.POST, consumes = CustomMediaTypeHolder.JSON_MIME_TYPE)
     public ResponseEntity<LibraryResource> createLibrary(@RequestBody final Library library) {
         try {
             Library createdLibrary = coreService.create(library);
@@ -62,22 +63,40 @@ public class RestInboundGateway extends AbstractFeedbackAware {
             LibraryResource libraryResource = assembler.toResource(createdLibrary);
             return ResponseEntity.created(location).body(libraryResource);
         } catch (Exception e) {
-            throw new LibraryCreationError(RestFeedbackContext.SOME_FEEDBACK);
+            throw new LibraryCreationError(RestFeedbackContext.SOME_FEEDBACK, e);
         }
     }
 
-    @RequestMapping("/libraries/{id}")
-    public ResponseEntity<?> getLibrary(@PathVariable final String id) {
-        Library library = coreService.getLibraryById(id);
-        LibraryResource libraryResource = assembler.toResource(library);
-        return ResponseEntity.ok(libraryResource);
+    @RequestMapping("/{id}")
+    public ResponseEntity<?> retrieveLibrary(@PathVariable final String id) {
+        try {
+            Library library = coreService.getLibraryById(id);
+            LibraryResource libraryResource = assembler.toResource(library);
+            return ResponseEntity.ok(libraryResource);
+        } catch (Exception e) {
+            throw new LibraryRetrievalError(RestFeedbackContext.SOME_FEEDBACK, e);
+        }
     }
 
-    @RequestMapping(value = "/libraries", method = RequestMethod.GET)
-    public ResponseEntity<List<LibraryResource>> getLibraries() {
-        List<Library> libraries = coreService.getLibraries();
-        List<LibraryResource> libraryResources = assembler.toResources(libraries);
-        return ResponseEntity.ok(libraryResources);
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<LibraryResource>> retrieveAllLibraries() {
+        try {
+            List<Library> libraries = coreService.getLibraries();
+            List<LibraryResource> libraryResources = assembler.toResources(libraries);
+            return ResponseEntity.ok(libraryResources);
+        } catch (Exception e) {
+            throw new LibraryRetrievalError(RestFeedbackContext.SOME_FEEDBACK, e);
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateLibrary(@RequestBody final Library library, @PathVariable("id") final String id) {
+        try {
+            coreService.update(library, id);
+            return ResponseEntity.accepted().build();
+        } catch (Exception e) {
+            throw new LibraryModificationError(RestFeedbackContext.SOME_FEEDBACK, e);
+        }
     }
 
 }

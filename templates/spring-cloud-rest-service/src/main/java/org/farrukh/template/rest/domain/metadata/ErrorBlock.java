@@ -18,10 +18,12 @@ package org.farrukh.template.rest.domain.metadata;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 /**
  * Responsible for holding an error information.
  */
+@Getter
 public class ErrorBlock {
 
     /**
@@ -43,11 +45,4 @@ public class ErrorBlock {
         this.message = message;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }

@@ -16,7 +16,6 @@
 
 package org.farrukh.template.rest.outbound.repository;
 
-import org.farrukh.template.rest.domain.model.Book;
 import org.farrukh.template.rest.domain.model.Library;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

@@ -1,0 +1,53 @@
+import groovy.json.JsonBuilder
+
+def dockerDirectory = 'docker'
+def containerName = project.name
+def fullImageName = "${project.group}/${project.name}:latest"
+def ansiblePlaybookPath = 'ansible-playbook'
+def buildArtifactName = "${project.name}-${version.toString()}.jar"
+
+task copyBuildArtifact(type: Copy, dependsOn: build) {
+    from('build/libs/') {
+        include buildArtifactName
+        rename buildArtifactName, "${project.name}.jar"
+    }
+    into "$dockerDirectory/artifacts"
+    doFirst {
+        logger.quiet "Copying the project artifact $buildArtifactName located on $buildDir"
+    }
+}
+
+task buildDockerImage(type: Exec, dependsOn: copyBuildArtifact) {
+    workingDir dockerDirectory
+    commandLine "sudo", 'docker', 'build', '--build-arg', "PROJECT_NAME=${project.name}.jar", '--tag', fullImageName, '.'
+    doFirst {
+        logger.quiet "Building docker image $fullImageName based on the Dockerfile in $dockerDirectory/"
+    }
+}
+
+task deployWithAnsiblePlaybookToDockerContainer(type: Exec, dependsOn: buildDockerImage) {
+    def extraVars = new JsonBuilder(
+            [container_name: containerName, host_name: containerName, image_name: fullImageName]).toString()
+    commandLine ansiblePlaybookPath, "$projectDir/ansible/deployment-playbook.yml", '--extra-vars', extraVars
+    doFirst {
+        logger.quiet "Deploying the Application to the docker container ${containerName} with port ${containerPort}"
+    }
+}
+
+task deleteDockerContainer(type: Exec) {
+    group 'Docker'
+    description = 'Deletes a docker container, even if it is running'
+    commandLine 'sudo', 'docker', 'rm', '-f', containerName
+    doFirst {
+        logger.quiet "Deleting docker container $containerName from the host"
+    }
+}
+
+task deleteDockerImage(type: Exec, dependsOn: [deleteDockerContainer]) {
+    group 'Docker'
+    description = 'Deletes a docker image'
+    commandLine 'sudo', 'docker', 'rmi', fullImageName
+    doFirst {
+        logger.quiet "Deleting docker image $fullImageName from the host"
+    }
+}

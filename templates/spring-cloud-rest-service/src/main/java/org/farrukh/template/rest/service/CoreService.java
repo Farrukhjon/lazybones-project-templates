@@ -28,4 +28,6 @@ public interface CoreService {
     Library getLibraryById(String id);
 
     List<Library> getLibraries();
+
+    void update(Library library, String id);
 }

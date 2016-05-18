@@ -1,21 +1,10 @@
+info:
+  app:
+    name: ${project.name}
+    group: ${project.group}
+    description: ${project.description}
+    version: ${project.version}
 spring:
-  profiles:
-    active: development
-
----
-spring:
-  profiles: production
-  data:
-    mongodb:
-      database: productiondb
-      host: mongo
-      port: 27017
-logging:
-  level: info
-
----
-spring:
-  profiles: development
   data:
     mongodb:
       database: testdb
