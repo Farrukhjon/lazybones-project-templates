@@ -14,5 +14,5 @@
  */
 
 dependencies {
-    compile("org.kurron:tools-java:${toolsJavaVersion}")
+    compile "org.kurron:tools-java:${toolsJavaVersion}"
 }
