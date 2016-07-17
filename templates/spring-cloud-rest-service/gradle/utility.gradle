@@ -14,11 +14,6 @@
  */
 
 dependencies {
-    compile("org.projectlombok:lombok:${lombokVersion}")
-    compile("org.kurron:tools-java:${toolsJavaVersion}")
-
-    compile('com.jayway.jsonpath:json-path')
-    testCompile('com.jayway.jsonpath:json-path-assert')
-
-    testCompile("com.jayway.restassured:rest-assured:${restassuredVersion}")
+    compile "org.projectlombok:lombok:${lombokVersion}",
+            "org.kurron:tools-java:${toolsJavaVersion}"
 }

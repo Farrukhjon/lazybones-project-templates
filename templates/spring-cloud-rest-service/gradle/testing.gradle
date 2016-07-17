@@ -1,3 +1,21 @@
+configurations {
+    testCompile.exclude module: 'groovy-all'
+    testCompile.exclude module: 'junit-dep'
+}
+
+dependencies {
+    compile 'com.jayway.jsonpath:json-path'
+
+    testCompile "org.spockframework:spock-core:${spockVersion}",
+                "org.spockframework:spock-spring:${spockVersion}",
+                "org.assertj:assertj-core:${assertJVersion}",
+                "info.cukes:cucumber-junit:${cucumberVersion}",
+                "info.cukes:cucumber-groovy:${cucumberVersion}",
+                "info.cukes:cucumber-spring:${cucumberVersion}",
+                'com.jayway.jsonpath:json-path-assert',
+                "com.jayway.restassured:rest-assured:${restassuredVersion}"
+}
+
 test {
     useJUnit {
         includeCategories 'org.kurron.categories.UnitTest'
@@ -6,10 +24,10 @@ test {
         showStandardStreams = false
         exceptionFormat = 'full'
     }
-    reports.html.destination =  "$buildDir/reports/unitTests"
+    reports.html.destination = "$buildDir/reports/unitTests"
 }
 
-task outboundIntegrationTests( type: Test, dependsOn: build ) {
+task outboundIntegrationTests(type: Test, dependsOn: build) {
     group 'Verification'
     description = 'Runs the outbound integration tests.'
     useJUnit {
@@ -19,13 +37,15 @@ task outboundIntegrationTests( type: Test, dependsOn: build ) {
         showStandardStreams = false
         exceptionFormat = 'full'
     }
-    reports.html.destination =  "$buildDir/reports/componentTests"
+    reports.html.destination = "$buildDir/reports/componentTests"
     // if the profile system property is set, copy into forked child process
     def springProfilesActive = System.properties['spring.profiles.active']
-    if ( springProfilesActive ) { systemProperties['spring.profiles.active'] = springProfilesActive }
+    if (springProfilesActive) {
+        systemProperties['spring.profiles.active'] = springProfilesActive
+    }
 }
 
-task inboundIntegrationTests( type: Test, dependsOn: build ) {
+task inboundIntegrationTests(type: Test, dependsOn: build) {
     group 'Verification'
     description = 'Runs the inbound integration tests.'
     useJUnit {
@@ -35,10 +55,12 @@ task inboundIntegrationTests( type: Test, dependsOn: build ) {
         showStandardStreams = false
         exceptionFormat = 'full'
     }
-    reports.html.destination =  "$buildDir/reports/integrationTests"
+    reports.html.destination = "$buildDir/reports/integrationTests"
     // if the profile system property is set, copy into forked child process
     def springProfilesActive = System.properties['spring.profiles.active']
-    if ( springProfilesActive ) { systemProperties['spring.profiles.active'] = springProfilesActive }
+    if (springProfilesActive) {
+        systemProperties['spring.profiles.active'] = springProfilesActive
+    }
 
     doFirst {
         // copy the integration test port that was set after the docker container was deployed
@@ -46,7 +68,7 @@ task inboundIntegrationTests( type: Test, dependsOn: build ) {
     }
 }
 
-task acceptanceTests( type: Test, dependsOn: build ) {
+task acceptanceTests(type: Test, dependsOn: build) {
     group 'Verification'
     description = 'Runs the acceptance tests.'
     // categories and cucumber tests don't play nicely -- no tests are detected and run
@@ -58,7 +80,9 @@ task acceptanceTests( type: Test, dependsOn: build ) {
     }
     // if the profile system property is set, copy into forked child process
     def springProfilesActive = System.properties['spring.profiles.active']
-    if ( springProfilesActive ) { systemProperties['spring.profiles.active'] = springProfilesActive }
+    if (springProfilesActive) {
+        systemProperties['spring.profiles.active'] = springProfilesActive
+    }
 
     doFirst {
         // copy the integration test port that was set after the docker container was deployed
