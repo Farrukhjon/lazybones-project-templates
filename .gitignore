@@ -1,9 +1,17 @@
-build/
-.gradle/
+**/.gradle
+**/build
 
-*.iml
+**/out/
+.idea
+**/.idea
 
-## Directory-based project format:
-.idea/
+**/*.iml
+**/*.ipr
+**/*.iws
 
+**/bin
+**/.settings
+**/.project
+**/.classpath
 
+**/node_modules
