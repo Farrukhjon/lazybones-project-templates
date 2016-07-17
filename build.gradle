@@ -17,7 +17,7 @@ lazybones {
     packageExcludes = globalExcludes 
      
     // Template exclusions.
-    template( 'spring-boot-rest-api' ) {
+    template( 'spring-rest-service' ) {
         packageExcludes = globalExcludes << 'docker/artifacts'
     }
 
