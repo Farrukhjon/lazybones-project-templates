@@ -16,15 +16,18 @@
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:${asciidoctorPluginVersion}")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'org.asciidoctor.convert'
 
 apply from: "$rootDir/gradle/repositories.gradle"
 apply from: "$rootDir/gradle/spring-boot.gradle"
@@ -56,3 +59,24 @@ if ('true' == buildDockerImage) {
 /*if ('master' == branch) {
     defaultTasks += ['publishToMavenLocal']
 }*/
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+test {
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    attributes 'snippets': snippetsDir
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+jar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
+}

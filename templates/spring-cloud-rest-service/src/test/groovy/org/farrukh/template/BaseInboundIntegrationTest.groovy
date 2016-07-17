@@ -21,13 +21,16 @@ import org.junit.experimental.categories.Category
 import org.kurron.categories.InboundIntegrationTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.boot.test.WebIntegrationTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.client.RestOperations
 import org.springframework.web.util.UriComponentsBuilder
 
 @Category(InboundIntegrationTest)
+@ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
 @WebIntegrationTest(randomPort = true)
-abstract class BaseInboundIntegrationTest extends BaseIntegrationTest {
+abstract class BaseInboundIntegrationTest extends BaseTest {
 
     @Autowired
     RestOperations restTemplate
@@ -41,7 +44,7 @@ abstract class BaseInboundIntegrationTest extends BaseIntegrationTest {
     /**
      * Creates uri for controllers tests.
      * @param path the request mapped path
-     * @return uri in string.
+     * @return uri.
      */
     def createUrl(String path) {
         UriComponentsBuilder.newInstance().

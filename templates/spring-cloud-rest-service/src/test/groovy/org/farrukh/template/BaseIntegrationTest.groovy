@@ -16,9 +16,11 @@
 
 package org.farrukh.template
 
+import org.springframework.boot.test.IntegrationTest
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.test.context.ContextConfiguration
 
 @ContextConfiguration(classes = Application, loader = SpringApplicationContextLoader)
+@IntegrationTest
 abstract class BaseIntegrationTest extends BaseTest {
 }

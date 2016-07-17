@@ -52,8 +52,8 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
-    testCompile('org.springframework.restdocs:spring-restdocs-core')
-    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+    testCompile("org.springframework.restdocs:spring-restdocs-core:${springRestDocsVersion}")
+    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc:${springRestDocsVersion}")
 }
 
 

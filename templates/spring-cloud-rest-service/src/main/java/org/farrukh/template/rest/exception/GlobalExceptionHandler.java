@@ -22,12 +22,14 @@ import org.kurron.feedback.FeedbackProvider;
 import org.kurron.feedback.NullFeedbackProvider;
 import org.kurron.feedback.exceptions.AbstractError;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
  * Provides Global Errors Handling.
  */
+@ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements FeedbackAware {
 
     /**

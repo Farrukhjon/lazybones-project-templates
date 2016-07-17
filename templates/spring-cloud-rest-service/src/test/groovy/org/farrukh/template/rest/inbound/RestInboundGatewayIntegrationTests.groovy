@@ -16,8 +16,9 @@
 
 package org.farrukh.template.rest.inbound
 
+import static org.farrukh.template.rest.domain.metadata.CustomMediaTypeHolder.JSON_MEDIA_TYPE
+
 import org.farrukh.template.BaseInboundIntegrationTest
-import org.farrukh.template.rest.domain.metadata.CustomMediaTypeHolder
 import org.farrukh.template.rest.domain.model.Author
 import org.farrukh.template.rest.domain.model.Book
 import org.farrukh.template.rest.domain.resource.LibraryResource
@@ -25,6 +26,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.RequestEntity
+import org.springframework.http.ResponseEntity
 
 class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
 
@@ -39,8 +41,8 @@ class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
         def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
 
         def headers = new HttpHeaders()
-        headers.setContentType(CustomMediaTypeHolder.JSON_MEDIA_TYPE)
-        headers.setAccept([CustomMediaTypeHolder.JSON_MEDIA_TYPE])
+        headers.setContentType(JSON_MEDIA_TYPE)
+        headers.setAccept([JSON_MEDIA_TYPE])
         def request = new RequestEntity<>(book, headers, HttpMethod.POST, url)
 
         when: 'the request is made'
@@ -57,13 +59,18 @@ class RestInboundGatewayIntegrationTests extends BaseInboundIntegrationTest {
         and:
         def book = new Book(name: 'Effective Java', authors: [new Author(firstName: 'Bloch', lastName: 'Joshua')])
         def headers = new HttpHeaders()
-        headers.setContentType(CustomMediaTypeHolder.JSON_MEDIA_TYPE)
-        headers.setAccept([CustomMediaTypeHolder.JSON_MEDIA_TYPE])
-        def tmpRequest = new RequestEntity<>(book, headers, HttpMethod.POST, url)
-        def tmpResponse = restTemplate.exchange(tmpRequest, LibraryResource)
+        headers.setContentType(JSON_MEDIA_TYPE)
+        headers.setAccept([JSON_MEDIA_TYPE])
+        def tmpRequest = RequestEntity.post(url).
+                accept(JSON_MEDIA_TYPE).
+                contentType(JSON_MEDIA_TYPE).
+                body(book)
+        ResponseEntity tmpResponse = restTemplate.exchange(tmpRequest, LibraryResource)
 
+        def url1 = tmpResponse.body.library.id
         and:
-        def request = new RequestEntity<>(book, headers, HttpMethod.GET, createUrl("/books/${tmpResponse.body.book.id}"))
+        RequestEntity request = RequestEntity.get(createUrl("/books/$url1")).
+                accept(JSON_MEDIA_TYPE)
 
         when:
         def response = restTemplate.exchange(request, LibraryResource)

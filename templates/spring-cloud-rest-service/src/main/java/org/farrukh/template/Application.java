@@ -29,8 +29,9 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 
-@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
+@EnableHypermediaSupport(type = HypermediaType.HAL)
 @EnableCaching
 @EnableDiscoveryClient
 @SpringBootApplication

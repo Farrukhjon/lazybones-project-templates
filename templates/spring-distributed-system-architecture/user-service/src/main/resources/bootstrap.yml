@@ -1,9 +1,0 @@
-# Used for registring and some extra features.
-spring:
-      application:
-             name: user-service
-
-# URL and port of the config-server
-      cloud:
-         config:
-              uri: http://localhost:8888

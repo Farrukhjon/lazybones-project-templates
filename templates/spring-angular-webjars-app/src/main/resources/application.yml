@@ -1,0 +1,20 @@
+spring.profiles.active: development
+
+server:
+  port: 8080
+
+# Development profile used for testing and development phase.
+---
+spring:
+  profiles: development
+
+  h2.console.enabled: true
+
+  # Initialize a database using Hibernate
+  jpa.hibernate.ddl-auto: create-drop
+
+logging.level:
+  org:
+    hibernate.SQL: DEBUG
+    springframework.security: DEBUG
+

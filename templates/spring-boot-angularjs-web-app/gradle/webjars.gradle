@@ -1,5 +1,0 @@
-dependencies {
-    compile("org.webjars:bootstrap:${webjarsBootstrapVersion}")
-    compile("org.webjars:angularjs:${webjarsAngularJsVersion}")
-    compile("org.webjars:lodash:${lodashVersion}")
-}
