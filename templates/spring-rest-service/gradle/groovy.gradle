@@ -1,0 +1,9 @@
+apply plugin: 'groovy'
+
+dependencies {
+    testCompile "org.codehaus.groovy:groovy:${groovyVersion}",
+                "org.codehaus.groovy:groovy-xml:${groovyVersion}",
+                "org.codehaus.groovy:groovy-json:${groovyVersion}",
+                "org.codehaus.groovy:groovy-sql:${groovyVersion}",
+                "org.codehaus.groovy:groovy-nio:${groovyVersion}"
+}

@@ -1,0 +1,50 @@
+# embedded server configuration
+server:
+      port: 8080
+
+# enable shutdown of application via a POST request.
+endpoints:
+         shutdown:
+                 enabled: true
+         health:
+               sensitive: false    # display full details for non-authenticated requests
+
+spring:
+       # show the banner file during startup
+       main:
+            banner-mode: console
+       # mongodb datasource configuration
+       data:
+            mongodb:
+                    host: mongodb
+                    port: 27017
+                    database: testdb
+       # json configuration
+       jackson:
+               serialization:
+                   indent_output: true
+
+##### e Profile specific overrides #####
+
+# integration testing
+---
+spring:
+      profiles: testing
+info:
+    app:
+       name: spring-boot-rest-api
+       description: In testing mode
+       version: testing
+       realm: integration-test
+
+# live
+---
+spring:
+      profiles: live
+# Customize application info information
+info:
+    app:
+       name: ${project.name}
+       description: ${description}
+       version: ${version}
+       realm: production
