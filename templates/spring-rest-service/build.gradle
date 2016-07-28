@@ -17,6 +17,8 @@ apply plugin: 'org.asciidoctor.convert'
 
 apply from: "$rootDir/gradle/repositories.gradle"
 apply from: "$rootDir/gradle/spring.gradle"
+apply from: "$rootDir/gradle/database.gradle"
+apply from: "$rootDir/gradle/hibernate.gradle"
 apply from: "$rootDir/gradle/groovy.gradle"
 apply from: "$rootDir/gradle/checkstyle.gradle"
 apply from: "$rootDir/gradle/codenarc.gradle"

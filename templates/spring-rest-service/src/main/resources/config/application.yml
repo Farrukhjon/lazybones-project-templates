@@ -23,7 +23,6 @@ spring:
        jackson:
                serialization:
                    indent_output: true
-
 ##### e Profile specific overrides #####
 
 # integration testing
@@ -41,6 +40,21 @@ info:
 ---
 spring:
       profiles: live
+      datasource:
+               url: jdbc:mysql://localhost:3306/testdb
+               username: ${mysql.username}
+               password: ${mysql.password}
+               driver-class-name: com.mysql.jdbc.Driver
+      jpa:
+          hibernate:
+            ddl-auto: none
+          properties:
+             javax.persistence.sharedCache.mode: ALL
+             hibernate:
+               cache:
+                 use_second_level_cache: true
+                 use_query_cache: true
+                 region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
 # Customize application info information
 info:
     app:
